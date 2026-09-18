@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Advanced · Interview Prep · Boosty / Utexo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{--bg0:#070b12;--panel:rgba(18,26,40,.92);--panel-border:rgba(120,160,220,.14);--text:#eef3fb;--muted:#8b9bb3;--accent:#6eb6ff;--accent2:#a78bfa;--good:#34d399;--warn:#fbbf24;--radius:20px;--shadow:0 24px 80px rgba(0,0,0,.45);--safe-b:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:"DM Sans",system-ui,sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 10% -10%,rgba(251,113,133,.12),transparent 55%),radial-gradient(900px 500px at 100% 0%,rgba(167,139,250,.14),transparent 50%),var(--bg0);overflow:hidden}
+#app{height:100%;display:grid;grid-template-rows:auto 1fr auto}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--panel-border);background:rgba(7,11,18,.75);backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#fb7185,var(--accent2));display:grid;place-items:center;font-weight:700;font-size:12px;color:#061018}
+.brand h1{margin:0;font-size:14px;font-weight:600}.brand p{margin:0;font-size:12px;color:var(--muted)}
+.sections{display:flex;gap:6px;flex:1;overflow-x:auto;scrollbar-width:none}.sec{border:1px solid transparent;background:transparent;color:var(--muted);font:500 12px/1 "DM Sans",sans-serif;padding:8px 12px;border-radius:999px;cursor:pointer}.sec.on{color:var(--text);background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.35)}
+.btn{border:1px solid var(--panel-border);background:rgba(255,255,255,.03);color:var(--text);border-radius:10px;padding:8px 12px;font:500 12px/1 "DM Sans",sans-serif;cursor:pointer}.btn.primary{background:linear-gradient(135deg,rgba(251,113,133,.25),rgba(167,139,250,.2));border-color:rgba(251,113,133,.4)}
+.main{display:grid;place-items:center;padding:20px 16px;min-height:0}
+.slide{width:min(920px,100%);max-height:100%;overflow:auto;background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(24px,4vw,44px);animation:rise .28s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tag{display:inline-flex;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fb7185;background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.3);border-radius:999px;padding:5px 10px;margin-bottom:14px}
+h2{margin:0 0 12px;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.02em}p,li{font-size:clamp(.98rem,1.5vw,1.08rem);line-height:1.55}.muted{color:var(--muted)}.big{font-size:clamp(1.08rem,2vw,1.28rem);line-height:1.45}
+ul,ol{margin:10px 0;padding-left:1.15em}li{margin:7px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.card{background:rgba(7,11,18,.55);border:1px solid var(--panel-border);border-radius:14px;padding:14px 16px}.card.warn{border-color:rgba(251,191,36,.35)}.card.good{border-color:rgba(52,211,153,.35)}
+.mono{font-family:"JetBrains Mono",monospace;font-size:.92em;color:#b9dcff}table{width:100%;border-collapse:collapse;font-size:.95rem}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--panel-border);vertical-align:top}th{color:var(--muted);font-size:12px;text-transform:uppercase}
+.q{font-size:clamp(1.12rem,2.3vw,1.35rem);font-weight:600;margin:4px 0 16px}.answer{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.28);border-radius:14px;padding:14px 16px;margin-top:8px}.answer.hidden{display:none}
+.reveal{margin-top:8px;border:1px dashed rgba(251,113,133,.45);background:transparent;color:#fb7185;border-radius:12px;padding:12px 14px;width:100%;font:600 14px/1 "DM Sans",sans-serif;cursor:pointer}
+.bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;padding:10px 16px calc(12px + var(--safe-b));border-top:1px solid var(--panel-border);background:rgba(7,11,18,.8)}
+.nav{display:flex;gap:8px}.nav .btn{min-width:44px;min-height:40px}.center-meta{text-align:center;color:var(--muted);font-size:12px}
+.progress{height:4px;width:min(280px,40vw);margin:0 auto 6px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#fb7185,var(--accent2));transition:width .25s}
+.hint{justify-self:end;color:var(--muted);font-size:11px}kbd{font-family:"JetBrains Mono",monospace;font-size:10px;background:rgba(255,255,255,.06);border:1px solid var(--panel-border);border-radius:5px;padding:2px 5px}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="top">
+  <div class="brand"><div class="logo">ADV</div><div><h1>Advanced depth</h1><p>Tech-expert layer · not the basics</p></div></div>
+  <nav class="sections" id="sections"></nav>
+  <div class="tools" style="display:flex;gap:8px">
+    <a class="btn" href="./index.html" style="text-decoration:none">Basics</a>
+    <button class="btn" id="btnQuiz" type="button">Quiz</button>
+    <button class="btn primary" id="btnFs" type="button">Full</button>
+  </div>
+</header>
+<main class="main" id="main"></main>
+<footer class="bottom">
+  <div class="nav"><button class="btn" id="prev" type="button">←</button><button class="btn" id="next" type="button">→</button></div>
+  <div class="center-meta"><div class="progress"><i id="prog"></i></div><div id="counter">1/1</div></div>
+  <div class="hint"><kbd>←</kbd> <kbd>→</kbd> · <kbd>H</kbd> quiz</div>
+</footer>
+</div>
+<script>
+const slides=[
+{section:"Why",html:`<span class="tag">Level up</span><h2>Basics ≠ tech-expert</h2><p class="big muted">Foundations explain Lightning. This deck is what gets probed next: commitments, failure taxonomies, system design, adversarial liquidity, RGB honesty.</p><div class="grid"><div class="card"><h3>Goal</h3><p class="muted">Tradeoffs + precise vocabulary. No buzzword salad.</p></div><div class="card warn"><h3>Rule</h3><p class="muted">If you don’t know RGB internals, say how you’d verify — don’t bluff.</p></div></div>`},
+{section:"Protocol",html:`<span class="tag">Lightning protocol</span><h2>Commitments &amp; revocation</h2><ul><li>Balances live in the latest pre-signed <strong>commitment transactions</strong>, not a DB row.</li><li>Updates <strong>revoke</strong> prior states via revocation secrets.</li><li>Broadcasting an old “fat” state → peer can <strong>punish</strong> (justice).</li><li>Security assumes you (or a <strong>watchtower</strong>) notice in time.</li></ul>`},
+{section:"Protocol",quiz:true,html:`<span class="tag">Hard Q</span><p class="q">Explain revocation in ≤60s without hand-waving.</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer>Each update creates a new commitment pair and invalidates the previous by exchanging revocation material. If I publish a revoked state, my counterparty can claim a penalty output. That’s why uptime/watchtowers are part of the security model, not optional polish.</div>`},
+{section:"Protocol",html:`<span class="tag">Lightning protocol</span><h2>HTLCs with teeth</h2><ul><li>Lifecycle: add → fulfill(preimage) / fail → remove</li><li>CLTV deltas are <strong>directional</strong>; bad deltas → stuck or unsafe routes</li><li>Intermediate offline mid-flight → funds locked until timeout; may force on-chain resolution</li></ul><div class="card warn" style="margin-top:12px">Pending ≠ failed. Age of pending HTLCs is an SLO signal.</div>`},
+{section:"Protocol",html:`<span class="tag">Adversarial</span><h2>Channel jamming</h2><p class="big">Attacker locks liquidity with HTLCs that never usefully settle, starving honest flow.</p><ul><li>Symptom: capacity looks fine, useful throughput collapses</li><li>Detection: stuck HTLC counts, peer patterns, slot exhaustion</li><li>Mitigations (ecosystem): reputation, upfront fees, better attribution — still an open ops topic</li></ul>`},
+{section:"Protocol",quiz:true,html:`<span class="tag">Hard Q</span><p class="q">Merchant channel is huge; receives fail. What do you check before “Lightning is down”?</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer>Direction first (inbound saturation). Then HTLC slot limits, peer policy (max HTLC), fee/CLTV, whether failures are temporary channel fail vs no-route, and whether jamming-like stuck HTLCs are eating slots.</div>`},
+{section:"Production",html:`<span class="tag">Production</span><h2>Failure taxonomy (trial week 1)</h2><table><tr><th>Class</th><th>Examples</th></tr><tr><td>Invoice</td><td>expired, bad hints, amount mismatch</td></tr><tr><td>Local liquidity</td><td>insufficient outbound</td></tr><tr><td>Path / remote</td><td>no-route, temp channel fail</td></tr><tr><td>Peer</td><td>disconnect mid-HTLC</td></tr><tr><td>Policy</td><td>fee floor, HTLC size</td></tr><tr><td>Chain</td><td>force-close fallout</td></tr></table>`},
+{section:"Production",html:`<span class="tag">Production</span><h2>Idempotency &amp; reconciliation</h2><ul><li>Keys: <span class="mono">payment_hash</span> + internal payment id</li><li>Webhooks are at-least-once → insert-if-not-exists</li><li>Credit once; store preimage/proof; nightly reconcile vs node</li></ul><div class="card good" style="margin-top:12px"><strong>Dispute walk:</strong> invoice → node payment state → webhook log → partner ledger → does preimage exist?</div>`},
+{section:"Production",quiz:true,html:`<span class="tag">Hard Q</span><p class="q">Design failure codes for a Lightning payments API (name ≥6).</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer><span class="mono">invoice_expired</span>, <span class="mono">amount_invalid</span>, <span class="mono">insufficient_outbound</span>, <span class="mono">no_route</span>, <span class="mono">peer_unavailable</span>, <span class="mono">fee_insufficient</span>, <span class="mono">htlc_timeout</span>, <span class="mono">policy_rejected</span>, <span class="mono">internal</span> — each with <span class="mono">retryable</span>.</div>`},
+{section:"Design",html:`<span class="tag">System design</span><h2>Prompt: PSP payout API</h2><p>Design pay-merchant on USDT-on-Bitcoin rails. Hit:</p><ol><li>Auth (mTLS / HMAC)</li><li>States: created → pending → settled|failed|expired</li><li>Webhooks + idempotency</li><li>Fee quote vs final</li><li>Liquidity reservation?</li><li>Abuse limits / velocity</li><li>Replay tooling</li></ol><div class="card" style="margin-top:10px">Close: finality is an explicit policy object — not UI speed.</div>`},
+{section:"Design",html:`<span class="tag">System design</span><h2>Prompt: Cloud / LSP liquidity</h2><ul><li>Shared pool vs per-tenant isolation</li><li>Rebalancing &amp; headroom alerts</li><li>Pricing inbound liquidity</li><li>Jamming resistance</li><li>Force-close as incident class with runbooks</li></ul>`},
+{section:"RGB",html:`<span class="tag">RGB depth</span><h2>Own this intellectually</h2><ul><li><strong>Client-side validation</strong> of consignments for your UTXOs</li><li>UTXO anchoring → coin selection constraints</li><li>Disclosure model ≠ ERC-20 explorers</li><li>Backup story harder (state/consignments + LN)</li><li>LN transport for assets = newer; ask maturity, don’t boast</li></ul>`},
+{section:"RGB",quiz:true,html:`<span class="tag">Hard Q</span><p class="q">RGB USDT vs ERC-20 USDT for an institutional PSP — 3 decision criteria?</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer>1) Trust/disclosure model (global contract vs client-side). 2) Tooling &amp; ops maturity / staffing. 3) Settlement path (Lightning integration, finality policy, custody boundary). Optionally compliance optics and bridge assumptions if cross-system.</div>`},
+{section:"RGB",quiz:true,html:`<span class="tag">Hard Q</span><p class="q">You haven’t shipped RGB. What’s the strong answer?</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer>Admit gap → show client-side validation + LN pairing model → week-1 plan on their docs/SDK + thin vertical slice → pair with node/liquidity owner. Stronger than fake expertise.</div>`},
+{section:"Mock",quiz:true,html:`<span class="tag">Timed mock</span><p class="q">User says paid; merchant says unpaid. Walk the reconciliation.</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer>Invoice state → node HTLC/payment → webhook delivery/retries → merchant ledger row → preimage presence → classify: never paid / paid-not-credited / double path / clock/expiry edge. Fix with idempotent credit + replay tool.</div>`},
+{section:"Mock",quiz:true,html:`<span class="tag">Timed mock</span><p class="q">What SLOs would you propose so they can decide “keep” after a pasantía?</p><button class="reveal" type="button" data-reveal>Reveal</button><div class="answer hidden" data-answer>Success rate by failure class, p95 invoice→settled, zero silent double-credits, pending-age runbook, liquidity headroom report, webhook reliability. Ship taxonomy + one vertical slice early as the keep signal.</div>`},
+{section:"Mock",html:`<span class="tag">Close</span><h2>Study shift</h2><ol><li>Stop re-reading “what is Lightning”</li><li>Drill commitments, taxonomy, design Prompt A</li><li>Read <span class="mono">07-advanced-tech.md</span> sessions A–D</li><li>Record yourself on 3 hard Qs</li></ol><p class="muted" style="margin-top:14px"><a href="./index.html">← Back to basics deck</a></p>`}
+];
+const main=document.getElementById('main'),prog=document.getElementById('prog'),counter=document.getElementById('counter'),sectionsEl=document.getElementById('sections'),btnQuiz=document.getElementById('btnQuiz');
+let i=0,quizMode=true,touchX=null;
+[...new Set(slides.map(s=>s.section))].forEach(name=>{const b=document.createElement('button');b.className='sec';b.type='button';b.textContent=name;b.dataset.section=name;b.onclick=()=>{i=slides.findIndex(s=>s.section===name);render()};sectionsEl.appendChild(b)});
+function render(){const slide=slides[i];main.innerHTML=`<article class="slide">${slide.html}</article>`;counter.textContent=`${i+1} / ${slides.length}`;prog.style.width=`${((i+1)/slides.length)*100}%`;[...sectionsEl.children].forEach(el=>el.classList.toggle('on',el.dataset.section===slide.section));document.getElementById('prev').disabled=i===0;document.getElementById('next').disabled=i===slides.length-1;bindReveal();applyQuiz()}
+function bindReveal(){main.querySelectorAll('[data-reveal]').forEach(btn=>btn.addEventListener('click',()=>{const ans=btn.parentElement.querySelector('[data-answer]');if(!ans)return;ans.classList.remove('hidden');btn.remove()}))}
+function applyQuiz(){btnQuiz.classList.toggle('primary',quizMode);btnQuiz.textContent=quizMode?'Quiz on':'Quiz';main.querySelectorAll('[data-answer]').forEach(ans=>{if(quizMode&&slides[i].quiz){ans.classList.add('hidden');if(!ans.parentElement.querySelector('[data-reveal]')){const btn=document.createElement('button');btn.className='reveal';btn.type='button';btn.dataset.reveal='1';btn.textContent='Reveal';ans.before(btn);bindReveal()}}})}
+function next(){if(i<slides.length-1){i++;render()}}function prev(){if(i>0){i--;render()}}
+document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;btnQuiz.onclick=()=>{quizMode=!quizMode;render()};document.getElementById('btnFs').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next()}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev()}if(e.key==='h'||e.key==='H'){quizMode=!quizMode;render()}if(e.key==='f'||e.key==='F')document.getElementById('btnFs').click()});
+main.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].screenX},{passive:true});main.addEventListener('touchend',e=>{if(touchX==null)return;const dx=e.changedTouches[0].screenX-touchX;touchX=null;if(Math.abs(dx)<50)return;if(dx<0)next();else prev()},{passive:true});
+render();
+</script>
+</body>
+</html>
