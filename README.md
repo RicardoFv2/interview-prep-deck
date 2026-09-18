@@ -1,12 +1,14 @@
 ﻿# Interview Prep Deck
 
-Public study deck for a short **Boosty Labs / Utexo** tech-expert interview screen (Lightning → settlement → RGB → STAR / trial fit).
+Public study deck for a short **Boosty Labs / Utexo** tech-expert interview screen.
 
-**Live site:** after Pages is enabled — `https://ricardofv2.github.io/interview-prep-deck/`
+**Live**
+- Basics: https://ricardofv2.github.io/interview-prep-deck/
+- Advanced: https://ricardofv2.github.io/interview-prep-deck/study-deck-advanced.html
 
-## Study tips
-- Arrow keys or swipe between slides
-- `H` or Quiz toggles answer-hiding; use Reveal on practice slides
-- `F` fullscreen
+## Decks
+- `index.html` — foundations
+- `study-deck-advanced.html` — tech-expert depth
+- `07-advanced-tech.md` — full advanced notes
 
 Study material only — not affiliated with Boosty Labs or Utexo.
