@@ -215,3 +215,39 @@ Don’t memorize every Swap REST path unless the role is Swap-focused; know the 
 ---
 
 *Sources: docs.utexo.com pages listed above · Interview Prep*
+
+---
+
+## 12. Docs-crawl deltas (extra interview ammo)
+
+Pulled from full `docs.utexo.com` index crawl — use these; don’t invent more.
+
+### API surfaces (groups)
+| Surface | Base / note |
+|---|---|
+| **Cloud control plane** | `https://cloud-api.thunderstack.org` — node CRUD/lifecycle, webhooks, logs (≠ RLN pay API) |
+| **RLN REST** | On the node — issue/send/invoices/channels/peers (self-host or Cloud-connected) |
+| **Mint gateway** | `https://transfer.gateway.dev.utexo.com/api/v0` — networks, estimate, bridge-in-signature, verify, history |
+| **Swap** | Partner-gated base + `X-API-Key` — quote, intents, approvals, swaps, affiliates |
+| **“RGB Node API”** in overview | **404 / unpublished** in crawl — don’t claim it |
+
+### Production caveats (high value in interview)
+- **RLN:** docs say mainnet ≈ **on-chain RGB**; Lightning still **testnet/beta**
+- **Mint:** stated commission **0.03%** (+ chain gas + BTC RGB fee); **BTC mainnet N/A** in crawled Mint notes; LN destination **WIP**
+- **Swap marketing vs docs:** Suite page sounds LP/AMM-ish; Architecture/Swap = **HotPot intent/RFQ** — prefer the latter
+- **Full fee schedule:** “deterministic fees” claimed; **complete schedule not published**
+- **Cloud webhooks:** `X-Utexo-Signature`; Swap resolver: Ed25519 `X-Signature`
+
+### Narrate these E2E flows
+1. RGB on-chain transfer (fund → createUtxos → receive invoice → send → refresh)  
+2. RGB-over-Lightning (peer/channel → invoice → pay) — note mainnet LN limits  
+3. Mint EVM→RGB and RGB→EVM  
+4. Swap: health → quote → intent → approval → settle/refund  
+5. Cloud: create RLN → RUNNING → connect → call node REST  
+
+### Extra hard Qs
+- Cloud API vs RLN API — who provisions vs who pays?  
+- Mint TEE threshold vs “no custodian” marketing — precise language  
+- What’s WIP (LN dest, BTC mainnet mint, unpublished OpenAPI)?  
+
+Full tables + cited snippets: `09-utexo-docs-digest.md`
