@@ -141,6 +141,7 @@ ol.tight li, ul.tight li { margin: 6px 0; }
   <div class="grp">Hoy</div>
   <a href="#inicio">Inicio</a>
   <a href="#plan">Plan de esta noche</a>
+  <a href="#empresas">Boosty + Utexo</a>
   <div class="grp">Teoría</div>
   <a href="#lightning">Lightning</a>
   <a href="#settlement">Settlement</a>
@@ -197,6 +198,62 @@ ol.tight li, ul.tight li { margin: 6px 0; }
     <tr><td>Mock</td><td>15 min</td><td>Timer 10 min</td></tr>
   </table>
   <p class="mute">Mañana, 30 min: solo scripts + 4 productos + <span class="mono">@utexo/wdk-rgb-lightning</span>. Nada nuevo.</p>
+</section>
+
+<section id="empresas">
+  <p class="kicker">Si preguntan “who are we?”</p>
+  <h2>Boosty Labs y Utexo</h2>
+  <p>Hechos <strong>públicos</strong>. No inventes organigrama ni “I work with Viktor.” El seat puede ser Boosty staff-aug dentro de Utexo, Utexo directo, o Boosty Web3 general — <em>pregúntalo</em>.</p>
+
+  <h3>Boosty Labs</h3>
+  <p>Studio / partner de ingeniería Web3, AI y security. Fundado a finales de <strong>2017</strong> por un equipo con background fintech. Modelo: <strong>outsourcing</strong> (ellos entregan el producto) o <strong>staff augmentation</strong> (el engineer entra a tu standup). Estructura USA, operación global. Sitio: <a href="https://boostylabs.com/" style="color:var(--amber)">boostylabs.com</a>.</p>
+  <table>
+    <tr><th>Claim público (sitio)</th><th>Detalle</th></tr>
+    <tr><td>Escala</td><td>9+ años · ~150+ engineers · cientos de proyectos / 200+ clientes (números de marketing; no recites como audit)</td></tr>
+    <tr><td>Focos</td><td>Blockchain/Web3 · AI/LLM · post-quantum security</td></tr>
+    <tr><td>Bitcoin / LN</td><td>Ofrecen Bitcoin development y Lightning como servicio. Hay vacante pública “Lightning Network R&amp;D Lead”.</td></tr>
+    <tr><td>Nombres que citan</td><td>ConsenSys, Ledger, Coinbase, McKinsey, Storj, WalletConnect, Near, 1inch, Paraswap</td></tr>
+    <tr><td>Cómo te contratan</td><td>Discovery → proposal / team → sprints → launch. Un engineer, un proyecto (dicen).</td></tr>
+  </table>
+  <div class="say"><strong>Di esto · What is Boosty? (45s)</strong>
+  Boosty Labs is a Web3 engineering studio founded in 2017. They do full-product delivery and staff augmentation — AI, blockchain, and more recently post-quantum security. Public case names include ConsenSys, Ledger, and Storj. They also advertise Bitcoin and Lightning work. My read is they may staff-aug into Utexo, but I would confirm who employs me and who reviews the trial.</div>
+
+  <h3>Utexo</h3>
+  <p>Infra de <strong>USDT nativo en Bitcoin</strong>. Sede pública: <strong>Dubai / UAE</strong>. Fundada en <strong>2025</strong> por <strong>Viktor Ihnatiuk</strong> y <strong>Chris Hutchinson</strong>. Sitio: <a href="https://utexo.com/" style="color:var(--amber)">utexo.com</a> · docs: <a href="https://docs.utexo.com/" style="color:var(--amber)">docs.utexo.com</a>.</p>
+  <table>
+    <tr><th>Tema</th><th>Hecho público</th></tr>
+    <tr><td>Problema</td><td>USDT vive en otras chains; Bitcoin no tenía riel estable de stablecoin a escala. Fees impredecibles, execution pública, settlement fragmentado.</td></tr>
+    <tr><td>Solución</td><td>Lightning (velocidad) + RGB (assets / client-side) + Bitcoin (ancla). Un API/SDK. “Sin reescribir custody ni UX.”</td></tr>
+    <tr><td>Productos</td><td>SDK · Cloud (RLN gestionado / Thunderstack) · Mint · Swap (HotPot RFQ)</td></tr>
+    <tr><td>Compradores</td><td>PSPs, exchanges, custodians, enterprise/retail wallets, iGaming</td></tr>
+    <tr><td>Seed (mar 2026)</td><td><strong>$7.5M</strong> co-led por <strong>Tether, Big Brain Holdings, Portal Ventures</strong>. También Franklin Templeton, Maven11, Fulgur, etc.</td></tr>
+    <tr><td>Quotes</td><td>Paolo Ardoino (Tether): Bitcoin-native USDT settlement via Bitcoin + Lightning.</td></tr>
+  </table>
+  <div class="say"><strong>Di esto · What is Utexo? (60s)</strong>
+  Utexo is a Bitcoin-native settlement layer for USDT. Publicly they’re based in the UAE, founded in 2025 by Viktor Ihnatiuk and Chris Hutchinson. They combine Lightning for speed and RGB for Bitcoin-native assets, exposed as SDK, Cloud, Mint, and Swap. In March 2026 they announced a $7.5 million seed co-led by Tether, Big Brain, and Portal. I haven’t shipped their internals — I know the public product map and I’d start from the docs.</div>
+
+  <h3>Cómo se relacionan</h3>
+  <div class="grid">
+    <div class="card good">
+      <h3>Puente</h3>
+      <p>Viktor Ihnatiuk fundó <strong>Boosty</strong> y es co-founder de <strong>Utexo</strong>. Boosty aparece como studio de ingeniería / case alrededor del producto. Cloud de Utexo corre sobre <strong>Thunderstack</strong>.</p>
+    </div>
+    <div class="card warn">
+      <h3>No asumas</h3>
+      <p class="mute">No digas “Boosty es Utexo” ni recites el cap table entero. Pregunta: ¿el contrato es con Boosty, el reviewer es el tech expert de Utexo, o ambos?</p>
+    </div>
+  </div>
+  <div class="say"><strong>Di esto · How are they connected? (30s)</strong>
+  Publicly they share a founder — Viktor Ihnatiuk. Boosty is the engineering studio; Utexo is the Bitcoin-USDT product. My trial might be Boosty staff-aug on the Utexo stack. That’s why I want to confirm the employer and the keep/fire reviewer on this call.</div>
+
+  <div class="card">
+    <h3>Follow-ups posibles</h3>
+    <ul class="tight">
+      <li><strong>Why Tether?</strong> — USDT is their asset; they want Bitcoin as a dollar rail, not only Tron/ETH. Ardoino said that in the seed PR.</li>
+      <li><strong>Why not just Tron USDT?</strong> — Different trust, fees, and Bitcoin security story. Partners want stablecoin UX with Bitcoin settlement topology.</li>
+      <li><strong>Is Boosty the employer?</strong> — I don’t know. The coordinator said Boosty and Utexo “llevan ambos proyectos.” I’ll ask.</li>
+    </ul>
+  </div>
 </section>
 
 <section id="lightning">
@@ -448,6 +505,7 @@ ol.tight li, ul.tight li { margin: 6px 0; }
   </div>
 
   <h3>Checklist — marca al hablarlo</h3>
+  <label class="check"><input type="checkbox" data-k="co" /> Boosty 45s + Utexo 60s + cómo se conectan</label>
   <label class="check"><input type="checkbox" data-k="ln" /> Lightning ≤90s</label>
   <label class="check"><input type="checkbox" data-k="alice" /> Alice/Bob 50k en papel</label>
   <label class="check"><input type="checkbox" data-k="route" /> No-route 45s</label>

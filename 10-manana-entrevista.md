@@ -33,8 +33,9 @@ No leas ALL-IN-ONE entero. Habla en voz alta. Escribir ≠ entrevista.
 
 - Gate corto de **tech expert** → si pasas, **pasantía/trial**.
 - CVs enviados en julio. Employer puede ser Boosty staff-aug a Utexo, Utexo directo, o Boosty Web3 general — **pregúntalo**.
-- Boosty Labs: studio Web3; Utexo es case público; founder compartido Viktor Ihnatiuk.
-- Utexo: USDT nativo en Bitcoin (Lightning + RGB). Seed público Mar 2026 (Tether / Big Brain / Portal, según PR). No recites el seed a menos que pregunten.
+- Boosty Labs: studio Web3 (2017); outsourcing + staff-aug. Citan ConsenSys, Ledger, Storj, Coinbase. Ofrecen Bitcoin/Lightning.
+- Utexo: UAE, fundada 2025 por **Viktor Ihnatiuk** (también founder de Boosty) + **Chris Hutchinson**. USDT nativo en Bitcoin (LN + RGB). Seed **$7.5M** mar 2026, co-led Tether / Big Brain / Portal.
+- Relación: founder compartido; Boosty puede staff-aug al producto Utexo. **Pregunta quién te contrata.** Detalle en la guía web `#empresas`.
 
 ---
 
