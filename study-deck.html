@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Study deck for Boosty Labs / Utexo tech-expert interview — Lightning, settlement, RGB, STAR." />
+<title>Interview Prep · Boosty / Utexo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg0: #070b12;
+  --bg1: #0c1220;
+  --panel: rgba(18, 26, 40, 0.92);
+  --panel-border: rgba(120, 160, 220, 0.14);
+  --text: #eef3fb;
+  --muted: #8b9bb3;
+  --accent: #6eb6ff;
+  --accent2: #a78bfa;
+  --good: #34d399;
+  --warn: #fbbf24;
+  --danger: #fb7185;
+  --radius: 20px;
+  --shadow: 0 24px 80px rgba(0,0,0,.45);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(110,182,255,.18), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(167,139,250,.14), transparent 50%),
+    radial-gradient(800px 500px at 50% 120%, rgba(52,211,153,.08), transparent 45%),
+    var(--bg0);
+  overflow: hidden;
+}
+#app { height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+.top {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px 16px 10px; border-bottom: 1px solid var(--panel-border);
+  background: rgba(7,11,18,.75); backdrop-filter: blur(12px);
+}
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.logo {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: grid; place-items: center; font-weight: 700; font-size: 13px; color: #061018;
+  flex-shrink: 0;
+}
+.brand h1 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: .01em; }
+.brand p { margin: 0; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sections { display: flex; gap: 6px; flex: 1; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+.sections::-webkit-scrollbar { display: none; }
+.sec {
+  border: 1px solid transparent; background: transparent; color: var(--muted);
+  font: 500 12px/1 "DM Sans", sans-serif; padding: 8px 12px; border-radius: 999px;
+  cursor: pointer; white-space: nowrap; transition: .15s ease;
+}
+.sec:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.sec.on { color: var(--text); background: rgba(110,182,255,.12); border-color: rgba(110,182,255,.35); }
+.tools { display: flex; gap: 8px; align-items: center; }
+.btn {
+  border: 1px solid var(--panel-border); background: rgba(255,255,255,.03);
+  color: var(--text); border-radius: 10px; padding: 8px 12px; font: 500 12px/1 "DM Sans", sans-serif;
+  cursor: pointer; transition: .15s ease;
+}
+.btn:hover { border-color: rgba(110,182,255,.4); background: rgba(110,182,255,.08); }
+.btn.primary { background: linear-gradient(135deg, rgba(110,182,255,.25), rgba(167,139,250,.2)); border-color: rgba(110,182,255,.4); }
+.main { position: relative; display: grid; place-items: center; padding: 20px 16px calc(20px + var(--safe-b)); min-height: 0; }
+.slide {
+  width: min(920px, 100%); max-height: 100%; overflow: auto;
+  background: var(--panel); border: 1px solid var(--panel-border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: clamp(24px, 4vw, 44px);
+  animation: rise .28s ease;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: none; } }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); background: rgba(110,182,255,.1); border: 1px solid rgba(110,182,255,.25);
+  border-radius: 999px; padding: 5px 10px; margin-bottom: 14px;
+}
+h2 { margin: 0 0 12px; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.2; letter-spacing: -.02em; }
+h3 { margin: 0 0 8px; font-size: 1rem; }
+p, li { font-size: clamp(.98rem, 1.5vw, 1.08rem); line-height: 1.55; color: var(--text); }
+.muted { color: var(--muted); }
+.big { font-size: clamp(1.1rem, 2.2vw, 1.35rem); line-height: 1.45; }
+ul, ol { margin: 10px 0; padding-left: 1.15em; }
+li { margin: 7px 0; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 14px; }
+@media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .brand p { display: none; } }
+.card {
+  background: rgba(7,11,18,.55); border: 1px solid var(--panel-border); border-radius: 14px; padding: 14px 16px;
+}
+.card.good { border-color: rgba(52,211,153,.35); }
+.card.warn { border-color: rgba(251,191,36,.35); }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .92em; color: #b9dcff; }
+table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .95rem; }
+th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--panel-border); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.q { font-size: clamp(1.15rem, 2.4vw, 1.4rem); font-weight: 600; margin: 4px 0 16px; letter-spacing: -.01em; }
+.answer {
+  background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.28);
+  border-radius: 14px; padding: 14px 16px; margin-top: 8px;
+}
+.answer.hidden { display: none; }
+.reveal {
+  margin-top: 8px; border: 1px dashed rgba(110,182,255,.4); background: transparent;
+  color: var(--accent); border-radius: 12px; padding: 12px 14px; width: 100%;
+  font: 600 14px/1 "DM Sans", sans-serif; cursor: pointer;
+}
+.reveal:hover { background: rgba(110,182,255,.08); }
+.bottom {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px;
+  padding: 10px 16px calc(12px + var(--safe-b)); border-top: 1px solid var(--panel-border);
+  background: rgba(7,11,18,.8); backdrop-filter: blur(12px);
+}
+.nav { display: flex; gap: 8px; }
+.nav .btn { min-width: 44px; min-height: 40px; }
+.center-meta { text-align: center; color: var(--muted); font-size: 12px; }
+.progress {
+  height: 4px; width: min(280px, 40vw); margin: 0 auto 6px; background: rgba(255,255,255,.06);
+  border-radius: 99px; overflow: hidden;
+}
+.progress > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .25s ease; }
+.hint { justify-self: end; color: var(--muted); font-size: 11px; }
+kbd {
+  font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--text);
+  background: rgba(255,255,255,.06); border: 1px solid var(--panel-border);
+  border-radius: 5px; padding: 2px 5px;
+}
+@media (max-width: 720px) { .hint { display: none; } .bottom { grid-template-columns: auto 1fr auto; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">IP</div>
+      <div>
+        <h1>Interview Prep</h1>
+        <p>Boosty Labs · Utexo · tech screen</p>
+      </div>
+    </div>
+    <nav class="sections" id="sections" aria-label="Sections"></nav>
+    <div class="tools">
+      <button class="btn" id="btnQuiz" type="button" title="Hide answers (H)">Quiz</button>
+      <a class="btn" href="./study-deck-advanced.html" style="text-decoration:none" title="Advanced depth">Advanced</a>
+      <button class="btn primary" id="btnFs" type="button" title="Fullscreen (F)">Full</button>
+    </div>
+  </header>
+  <main class="main" id="main"></main>
+  <footer class="bottom">
+    <div class="nav">
+      <button class="btn" id="prev" type="button" aria-label="Previous">←</button>
+      <button class="btn" id="next" type="button" aria-label="Next">→</button>
+    </div>
+    <div class="center-meta">
+      <div class="progress"><i id="prog"></i></div>
+      <div id="counter">1 / 1</div>
+    </div>
+    <div class="hint"><kbd>←</kbd> <kbd>→</kbd> · <kbd>H</kbd> quiz · <kbd>F</kbd> full</div>
+  </footer>
+</div>
+<script>
+const slides = [
+{ section: "Intro", html: `
+  <span class="tag">Study deck</span>
+  <h2>Tech-expert screen</h2>
+  <p class="big muted">Short interview → pasantía / trial. Study path: Lightning → settlement → RGB → fit.</p>
+  <div class="grid">
+    <div class="card"><h3>How to study</h3><p class="muted">Read a slide. Say the answer out loud. Reveal only after you try.</p></div>
+    <div class="card"><h3>Goal tonight</h3><p class="muted">Crush liquidity + one STAR + a 60s trial pitch.</p></div>
+  </div>` },
+{ section: "Intro", html: `
+  <span class="tag">Context</span>
+  <h2>What this interview is</h2>
+  <ul>
+    <li>CVs went out in <strong>July</strong> — company hiring developers</li>
+    <li>Gate: short talk with their <strong>tech expert</strong></li>
+    <li>Pass → <strong>pasantía / trial</strong>; they watch fit early (~2–3 months typical)</li>
+    <li>Public product angle: <strong>USDT on Bitcoin</strong> (Lightning + RGB / Utexo), Boosty linked as studio / builder</li>
+  </ul>
+  <p class="muted">Ask in the room: Boosty staff-aug, Utexo direct, or general Web3?</p>` },
+{ section: "Intro", html: `
+  <span class="tag">Agenda</span>
+  <h2>Study order</h2>
+  <table>
+    <tr><th>#</th><th>Block</th><th>Be able to…</th></tr>
+    <tr><td>1</td><td>Lightning</td><td>Channels, liquidity, BOLT11, failures</td></tr>
+    <tr><td>2</td><td>Settlement</td><td>PSP story, fees, custody questions</td></tr>
+    <tr><td>3</td><td>RGB</td><td>Plain English + honest learning plan</td></tr>
+    <tr><td>4</td><td>Fit</td><td>One STAR + 60s trial pitch</td></tr>
+  </table>` },
+{ section: "Lightning", html: `
+  <span class="tag">Day 1 · Lightning</span>
+  <h2>One-sentence model</h2>
+  <p class="big">Lightning is Bitcoin <strong>layer-2</strong>: lock BTC in <strong>payment channels</strong>, update balances <strong>off-chain</strong>, use the chain for open / close / disputes.</p>
+  <div class="card" style="margin-top:16px"><strong>Why it exists:</strong> faster, cheaper payments than broadcasting every payment on-chain.</div>` },
+{ section: "Lightning", html: `
+  <span class="tag">Day 1 · Lightning</span>
+  <h2>Capacity vs liquidity</h2>
+  <div class="grid">
+    <div class="card"><h3>Capacity</h3><p>Total BTC locked — size of the pipe.</p></div>
+    <div class="card warn"><h3>Liquidity</h3><p>How it’s <em>split</em> — can you <strong>send</strong> vs <strong>receive</strong>?</p></div>
+  </div>
+  <p class="big" style="margin-top:18px">Trap: “big channel” ≠ “can pay anyone.” <strong>Direction</strong> matters.</p>` },
+{ section: "Lightning", html: `
+  <span class="tag">Example A1</span>
+  <h2>Balances after a payment</h2>
+  <p>Capacity <span class="mono">1,000,000</span> sats · before Alice <span class="mono">700k</span> / Bob <span class="mono">300k</span></p>
+  <p>Alice pays Bob <span class="mono">50k</span></p>
+  <div class="card good" style="margin-top:14px">After: Alice <span class="mono">650k</span> · Bob <span class="mono">350k</span> · capacity unchanged</div>
+  <p class="muted">Say: “Capacity didn’t change — only the split did.”</p>` },
+{ section: "Lightning", html: `
+  <span class="tag">Day 1 · Lightning</span>
+  <h2>BOLT11 + HTLCs</h2>
+  <div class="grid">
+    <div class="card"><h3>BOLT11</h3><p>Invoice: amount, payment hash, expiry, routing hints. Receiver creates; payer pays.</p></div>
+    <div class="card"><h3>HTLC</h3><p>Multi-hop lock (hash + time). Atomic: preimage settles the path, or timeouts unwind.</p></div>
+  </div>` },
+{ section: "Lightning", html: `
+  <span class="tag">Day 1 · Lightning</span>
+  <h2>LSP in one slide</h2>
+  <ul>
+    <li>Helps wallets/partners avoid full always-online LN ops</li>
+    <li>Channel opens, inbound liquidity, connectivity, sometimes JIT channels</li>
+    <li>Tradeoff: dependency on LSP policy &amp; uptime</li>
+  </ul>
+  <div class="card" style="margin-top:12px">Utexo <em>Cloud</em> (public framing): managed Lightning so partners aren’t LN SRE on day one.</div>` },
+{ section: "Lightning", quiz: true, html: `
+  <span class="tag">Practice</span>
+  <p class="q">Why can a node with huge capacity still fail payments?</p>
+  <button class="reveal" type="button" data-reveal>Reveal answer</button>
+  <div class="answer hidden" data-answer>Capacity is pipe size. Liquidity is direction. Near-zero local → can’t send. Saturated receive side → can’t receive. Routing fails if any hop lacks the right direction for that amount.</div>` },
+{ section: "Lightning", quiz: true, html: `
+  <span class="tag">Practice</span>
+  <p class="q">BOLT11 fails “no route.” First-week debug?</p>
+  <button class="reveal" type="button" data-reveal>Reveal answer</button>
+  <div class="answer hidden" data-answer>Check expiry &amp; amount → local outbound → attempted routes → bottleneck hop liquidity → fee budget / missing private-channel hints. Separate liquidity vs peer liveness vs invoice bugs.</div>` },
+{ section: "Settlement", html: `
+  <span class="tag">Day 2 · Settlement</span>
+  <h2>Product one-liner (public)</h2>
+  <p class="big">Utexo: move <strong>USDT instantly and privately on Bitcoin</strong> — <strong>API</strong> + <strong>Cloud</strong> for Lightning / RGB-style stablecoin payments.</p>
+  <p class="muted">ICP: PSPs, exchanges, custodians, wallets, iGaming.</p>` },
+{ section: "Settlement", html: `
+  <span class="tag">Day 2 · Settlement</span>
+  <h2>Payment vs settlement</h2>
+  <div class="grid">
+    <div class="card"><h3>Payment</h3><p>User sees “done” in the app (speed / UX).</p></div>
+    <div class="card"><h3>Settlement</h3><p>Partner ledger treats it as final (webhook, hash, policy).</p></div>
+  </div>
+  <p style="margin-top:14px">Line: “I’d align what <em>final</em> means in week 1.”</p>` },
+{ section: "Settlement", html: `
+  <span class="tag">Day 2 · Settlement</span>
+  <h2>Custody questions</h2>
+  <ul>
+    <li>Who holds end-user keys today?</li>
+    <li>Freeze / reverse after preimage reveal?</li>
+    <li>Force-close disaster recovery?</li>
+    <li>System of record: DB or chain proofs?</li>
+  </ul>` },
+{ section: "Settlement", quiz: true, html: `
+  <span class="tag">Practice</span>
+  <p class="q">Why would a PSP care about Bitcoin-native USDT rails?</p>
+  <button class="reveal" type="button" data-reveal>Reveal answer</button>
+  <div class="answer hidden" data-answer>Instant UX vs slow L1, fee predictability in USDT terms, API (+ Cloud) without becoming full LN ops, clear custody boundary. Ask about success vs failure fees and idempotent webhooks.</div>` },
+{ section: "RGB", html: `
+  <span class="tag">Day 3 · RGB</span>
+  <h2>RGB in plain English</h2>
+  <p class="big">Bitcoin-centric assets with <strong>client-side validation</strong>: verify history for <em>your</em> coins; ownership anchors to Bitcoin <strong>UTXOs</strong> — not one global ERC-20-style contract ledger.</p>` },
+{ section: "RGB", html: `
+  <span class="tag">Day 3 · RGB</span>
+  <h2>Compare</h2>
+  <table>
+    <tr><th></th><th>Account USDT</th><th>RGB-style</th></tr>
+    <tr><td>State</td><td>Global contract</td><td>Client-side history</td></tr>
+    <tr><td>Explorer</td><td>Public balances</td><td>Different disclosure</td></tr>
+    <tr><td>Speed</td><td>That chain’s L1/L2</td><td>Lightning for instant</td></tr>
+    <tr><td>Tooling</td><td>Mature EVM</td><td>Newer — docs/SDK matter</td></tr>
+  </table>` },
+{ section: "RGB", html: `
+  <span class="tag">Day 3 · RGB</span>
+  <h2>Lightning + RGB</h2>
+  <p class="big">Lightning = fast rails.<br/>RGB = Bitcoin-native asset representation.<br/>Together (public Utexo story) = <strong>USDT UX on Bitcoin topology</strong>.</p>
+  <div class="card warn" style="margin-top:14px">Bridge / mint trust ≠ LN pathfinding. Don’t mix failure domains.</div>` },
+{ section: "RGB", quiz: true, html: `
+  <span class="tag">Practice</span>
+  <p class="q">You haven’t shipped RGB. What do you say?</p>
+  <button class="reveal" type="button" data-reveal>Reveal answer</button>
+  <div class="answer hidden" data-answer>“I haven’t shipped RGB to production. I understand client-side validation and why it pairs with Lightning for USDT-on-Bitcoin. In weeks 1–2 I’d run your public docs/SDK path, ship a thin integration or checklist, and pair with whoever owns node and liquidity.”</div>` },
+{ section: "Fit", html: `
+  <span class="tag">STAR · Fit</span>
+  <h2>STAR in 90 seconds</h2>
+  <ul>
+    <li><strong>S</strong>ituation — one sentence</li>
+    <li><strong>T</strong>ask — your job</li>
+    <li><strong>A</strong>ction — 2–4 steps <em>you</em> did</li>
+    <li><strong>R</strong>esult — metric or clear outcome + lesson</li>
+  </ul>
+  <p class="muted">Never present fictional samples as your bio.</p>` },
+{ section: "Fit", html: `
+  <span class="tag">Trial</span>
+  <h2>60s pasantía pitch</h2>
+  <ol>
+    <li>Why this problem (specific)</li>
+    <li>Weeks 1–2 plan (docs → invoice→webhook slice)</li>
+    <li>How you show “keep”</li>
+    <li>Honest gap + close plan</li>
+  </ol>` },
+{ section: "Fit", html: `
+  <span class="tag">Ask them</span>
+  <h2>Your four questions</h2>
+  <ol>
+    <li>Boosty staff-aug / Utexo / general Web3?</li>
+    <li>“Strong after trial” in week 2 vs month 2?</li>
+    <li>Day-one: LN ops, RGB, API, or integrations?</li>
+    <li>Who is the tech expert — what do they own?</li>
+  </ol>` },
+{ section: "Drill", quiz: true, html: `
+  <span class="tag">2-min drill</span>
+  <p class="q">Merchant channel is 10M sats. Receives start failing. Why?</p>
+  <button class="reveal" type="button" data-reveal>Reveal answer</button>
+  <div class="answer hidden" data-answer>Likely receive-side / inbound saturation — not “channel too small.” Confirm direction, then rebalance / new inbound / LSP liquidity.</div>` },
+{ section: "Drill", quiz: true, html: `
+  <span class="tag">2-min drill</span>
+  <p class="q">Sell Bitcoin-native USDT to a PSP in 60 seconds.</p>
+  <button class="reveal" type="button" data-reveal>Reveal answer</button>
+  <div class="answer hidden" data-answer>Instant UX, fee predictability, API + optional Cloud, custody boundary, Lightning speed + Bitcoin-centric assets. End with one question on finality and fees.</div>` },
+{ section: "Drill", html: `
+  <span class="tag">Close</span>
+  <h2>Tonight’s loop</h2>
+  <ol>
+    <li>Replay Lightning — answers out loud</li>
+    <li>One real STAR (90s)</li>
+    <li>Trial pitch once</li>
+    <li>Open <span class="mono">06-worked-examples.md</span> for A1 / A5 / B2</li>
+  </ol>
+  <p class="muted" style="margin-top:18px">Local files: <span class="mono">E:\\interview-prep</span></p>` }
+];
+
+const main = document.getElementById('main');
+const prog = document.getElementById('prog');
+const counter = document.getElementById('counter');
+const sectionsEl = document.getElementById('sections');
+const btnQuiz = document.getElementById('btnQuiz');
+let i = 0, quizMode = false, touchX = null;
+
+const sectionNames = [...new Set(slides.map(s => s.section))];
+sectionNames.forEach(name => {
+  const b = document.createElement('button');
+  b.className = 'sec'; b.type = 'button'; b.textContent = name; b.dataset.section = name;
+  b.addEventListener('click', () => { i = slides.findIndex(s => s.section === name); render(); });
+  sectionsEl.appendChild(b);
+});
+
+function render() {
+  const slide = slides[i];
+  main.innerHTML = `<article class="slide" id="slide">${slide.html}</article>`;
+  counter.textContent = `${i + 1} / ${slides.length}`;
+  prog.style.width = `${((i + 1) / slides.length) * 100}%`;
+  [...sectionsEl.children].forEach(el => el.classList.toggle('on', el.dataset.section === slide.section));
+  document.getElementById('prev').disabled = i === 0;
+  document.getElementById('next').disabled = i === slides.length - 1;
+  bindReveal();
+  applyQuiz();
+}
+function bindReveal() {
+  main.querySelectorAll('[data-reveal]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans = btn.parentElement.querySelector('[data-answer]');
+      if (!ans) return;
+      ans.classList.remove('hidden');
+      btn.remove();
+    });
+  });
+}
+function applyQuiz() {
+  btnQuiz.classList.toggle('primary', quizMode);
+  btnQuiz.textContent = quizMode ? 'Quiz on' : 'Quiz';
+  main.querySelectorAll('[data-answer]').forEach(ans => {
+    const isQuizSlide = slides[i].quiz;
+    if (quizMode && isQuizSlide) {
+      ans.classList.add('hidden');
+      if (!ans.parentElement.querySelector('[data-reveal]')) {
+        const btn = document.createElement('button');
+        btn.className = 'reveal'; btn.type = 'button'; btn.dataset.reveal = '1';
+        btn.textContent = 'Reveal answer';
+        ans.before(btn);
+        bindReveal();
+      }
+    }
+  });
+}
+function next() { if (i < slides.length - 1) { i++; render(); } }
+function prev() { if (i > 0) { i--; render(); } }
+
+document.getElementById('next').onclick = next;
+document.getElementById('prev').onclick = prev;
+btnQuiz.onclick = () => { quizMode = !quizMode; render(); };
+document.getElementById('btnFs').onclick = () => {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+};
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+  if (e.key === 'h' || e.key === 'H') { quizMode = !quizMode; render(); }
+  if (e.key === 'f' || e.key === 'F') document.getElementById('btnFs').click();
+});
+main.addEventListener('touchstart', e => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+main.addEventListener('touchend', e => {
+  if (touchX == null) return;
+  const dx = e.changedTouches[0].screenX - touchX;
+  touchX = null;
+  if (Math.abs(dx) < 50) return;
+  if (dx < 0) next(); else prev();
+}, { passive: true });
+
+render();
+</script>
+</body>
+</html>

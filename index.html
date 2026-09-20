@@ -1,428 +1,499 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Study deck for Boosty Labs / Utexo tech-expert interview — Lightning, settlement, RGB, STAR." />
-<title>Interview Prep · Boosty / Utexo</title>
+<title>Guía de estudio · Boosty / Utexo</title>
+<meta name="description" content="Guía completa para el tech-expert screen de Ricardo — Lightning, Utexo, RGB, casos del CV." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 <style>
 :root {
-  --bg0: #070b12;
-  --bg1: #0c1220;
-  --panel: rgba(18, 26, 40, 0.92);
-  --panel-border: rgba(120, 160, 220, 0.14);
-  --text: #eef3fb;
-  --muted: #8b9bb3;
-  --accent: #6eb6ff;
-  --accent2: #a78bfa;
-  --good: #34d399;
-  --warn: #fbbf24;
-  --danger: #fb7185;
-  --radius: 20px;
-  --shadow: 0 24px 80px rgba(0,0,0,.45);
-  --safe-b: env(safe-area-inset-bottom, 0px);
+  --bg: #100e0b;
+  --paper: #1a1712;
+  --ink: #f4eee4;
+  --mute: #9a9184;
+  --line: rgba(244,238,228,.1);
+  --amber: #e3a24a;
+  --sage: #7dcea0;
+  --rose: #e08b7a;
+  --safe: env(safe-area-inset-bottom, 0px);
 }
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: "DM Sans", system-ui, sans-serif;
-  color: var(--text);
+  margin: 0;
+  color: var(--ink);
+  font: 17px/1.55 "Source Sans 3", sans-serif;
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(110,182,255,.18), transparent 55%),
-    radial-gradient(900px 500px at 100% 0%, rgba(167,139,250,.14), transparent 50%),
-    radial-gradient(800px 500px at 50% 120%, rgba(52,211,153,.08), transparent 45%),
-    var(--bg0);
-  overflow: hidden;
+    radial-gradient(900px 420px at 0% 0%, rgba(227,162,74,.08), transparent 50%),
+    var(--bg);
 }
-#app { height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
-.top {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding: 12px 16px 10px; border-bottom: 1px solid var(--panel-border);
-  background: rgba(7,11,18,.75); backdrop-filter: blur(12px);
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.logo {
-  width: 32px; height: 32px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  display: grid; place-items: center; font-weight: 700; font-size: 13px; color: #061018;
-  flex-shrink: 0;
+.shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; position: relative; z-index: 1; }
+@media (max-width: 880px) { .shell { grid-template-columns: 1fr; } }
+
+.side {
+  position: sticky; top: 0; height: 100vh; overflow: auto;
+  padding: 28px 18px 32px;
+  border-right: 1px solid var(--line);
+  background: rgba(16,14,11,.92);
 }
-.brand h1 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: .01em; }
-.brand p { margin: 0; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sections { display: flex; gap: 6px; flex: 1; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
-.sections::-webkit-scrollbar { display: none; }
-.sec {
-  border: 1px solid transparent; background: transparent; color: var(--muted);
-  font: 500 12px/1 "DM Sans", sans-serif; padding: 8px 12px; border-radius: 999px;
-  cursor: pointer; white-space: nowrap; transition: .15s ease;
+.brand { margin: 0 0 6px; font-family: Fraunces, serif; font-size: 1.35rem; font-weight: 650; letter-spacing: -.03em; }
+.brand-sub { margin: 0 0 22px; color: var(--mute); font-size: 12px; }
+.side a {
+  display: block; color: var(--mute); text-decoration: none;
+  padding: 7px 10px; border-radius: 8px; font-size: 14px;
 }
-.sec:hover { color: var(--text); background: rgba(255,255,255,.04); }
-.sec.on { color: var(--text); background: rgba(110,182,255,.12); border-color: rgba(110,182,255,.35); }
-.tools { display: flex; gap: 8px; align-items: center; }
-.btn {
-  border: 1px solid var(--panel-border); background: rgba(255,255,255,.03);
-  color: var(--text); border-radius: 10px; padding: 8px 12px; font: 500 12px/1 "DM Sans", sans-serif;
-  cursor: pointer; transition: .15s ease;
+.side a:hover { color: var(--ink); background: rgba(244,238,228,.04); }
+.side a.on { color: var(--amber); background: rgba(227,162,74,.1); }
+.side .grp { margin: 16px 0 6px; padding: 0 10px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.side .extra { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+.menu-btn {
+  display: none; position: fixed; top: 12px; right: 12px; z-index: 20;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+  border-radius: 10px; padding: 8px 12px; font: 600 13px/1 "Source Sans 3", sans-serif;
 }
-.btn:hover { border-color: rgba(110,182,255,.4); background: rgba(110,182,255,.08); }
-.btn.primary { background: linear-gradient(135deg, rgba(110,182,255,.25), rgba(167,139,250,.2)); border-color: rgba(110,182,255,.4); }
-.main { position: relative; display: grid; place-items: center; padding: 20px 16px calc(20px + var(--safe-b)); min-height: 0; }
-.slide {
-  width: min(920px, 100%); max-height: 100%; overflow: auto;
-  background: var(--panel); border: 1px solid var(--panel-border); border-radius: var(--radius);
-  box-shadow: var(--shadow); padding: clamp(24px, 4vw, 44px);
-  animation: rise .28s ease;
+@media (max-width: 880px) {
+  .menu-btn { display: block; }
+  .side {
+    position: fixed; inset: 0 auto 0 0; width: min(280px, 86vw); z-index: 15;
+    transform: translateX(-110%); transition: transform .22s ease;
+  }
+  .side.open { transform: none; }
 }
-@keyframes rise { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: none; } }
-.tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--accent); background: rgba(110,182,255,.1); border: 1px solid rgba(110,182,255,.25);
-  border-radius: 999px; padding: 5px 10px; margin-bottom: 14px;
-}
-h2 { margin: 0 0 12px; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.2; letter-spacing: -.02em; }
-h3 { margin: 0 0 8px; font-size: 1rem; }
-p, li { font-size: clamp(.98rem, 1.5vw, 1.08rem); line-height: 1.55; color: var(--text); }
-.muted { color: var(--muted); }
-.big { font-size: clamp(1.1rem, 2.2vw, 1.35rem); line-height: 1.45; }
-ul, ol { margin: 10px 0; padding-left: 1.15em; }
-li { margin: 7px 0; }
-.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 14px; }
-@media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .brand p { display: none; } }
+
+.main { padding: 36px 28px calc(80px + var(--safe)); max-width: 860px; }
+@media (max-width: 880px) { .main { padding: 64px 18px calc(80px + var(--safe)); } }
+
+.kicker { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); font-weight: 700; }
+h1, h2, h3 { font-family: Fraunces, serif; letter-spacing: -.03em; font-weight: 650; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 8px 0 14px; }
+h2 { font-size: clamp(1.45rem, 3vw, 1.9rem); margin: 0 0 12px; }
+h3 { font-size: 1.15rem; margin: 0 0 8px; }
+p { margin: 0 0 12px; }
+.lede { font-size: 1.15rem; color: #d8d0c4; }
+section { padding: 42px 0 8px; border-top: 1px solid var(--line); }
+section:first-of-type { border-top: 0; padding-top: 0; }
+.mute { color: var(--mute); }
+.mono { font-family: "IBM Plex Mono", monospace; font-size: .86em; color: #f0c98a; }
+
+table { width: 100%; border-collapse: collapse; font-size: .95rem; margin: 12px 0 18px; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--mute); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
 .card {
-  background: rgba(7,11,18,.55); border: 1px solid var(--panel-border); border-radius: 14px; padding: 14px 16px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
 }
-.card.good { border-color: rgba(52,211,153,.35); }
-.card.warn { border-color: rgba(251,191,36,.35); }
-.mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .92em; color: #b9dcff; }
-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .95rem; }
-th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--panel-border); vertical-align: top; }
-th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
-.q { font-size: clamp(1.15rem, 2.4vw, 1.4rem); font-weight: 600; margin: 4px 0 16px; letter-spacing: -.01em; }
-.answer {
-  background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.28);
-  border-radius: 14px; padding: 14px 16px; margin-top: 8px;
+.card.warn { border-color: rgba(227,162,74,.4); }
+.card.good { border-color: rgba(125,206,160,.35); }
+.card.bad { border-color: rgba(224,139,122,.4); }
+
+.say {
+  margin: 14px 0;
+  padding: 16px 16px 16px 18px;
+  border-left: 3px solid var(--sage);
+  background: rgba(125,206,160,.07);
+  border-radius: 0 12px 12px 0;
+  font-size: .98rem;
 }
-.answer.hidden { display: none; }
-.reveal {
-  margin-top: 8px; border: 1px dashed rgba(110,182,255,.4); background: transparent;
-  color: var(--accent); border-radius: 12px; padding: 12px 14px; width: 100%;
-  font: 600 14px/1 "DM Sans", sans-serif; cursor: pointer;
+.say strong { color: var(--sage); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 6px; font-family: "Source Sans 3", sans-serif; }
+
+.reveal { margin: 8px 0 0; }
+.reveal > button {
+  width: 100%; text-align: left; cursor: pointer;
+  border: 1px dashed rgba(227,162,74,.45); background: transparent; color: var(--amber);
+  border-radius: 12px; padding: 12px 14px; font: 600 14px/1 "Source Sans 3", sans-serif;
 }
-.reveal:hover { background: rgba(110,182,255,.08); }
-.bottom {
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px;
-  padding: 10px 16px calc(12px + var(--safe-b)); border-top: 1px solid var(--panel-border);
-  background: rgba(7,11,18,.8); backdrop-filter: blur(12px);
+.reveal .hid { display: none; margin-top: 10px; }
+.reveal.open .hid { display: block; }
+.reveal.open > button { display: none; }
+
+.check { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0; font-size: .98rem; }
+.check input { margin-top: 5px; accent-color: var(--amber); }
+
+.links a { color: var(--amber); }
+ol.tight, ul.tight { margin: 8px 0 14px; padding-left: 1.2em; }
+ol.tight li, ul.tight li { margin: 6px 0; }
+
+.decks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.decks a {
+  color: var(--ink); text-decoration: none; border: 1px solid var(--line);
+  border-radius: 999px; padding: 7px 12px; font-size: 13px; background: var(--paper);
 }
-.nav { display: flex; gap: 8px; }
-.nav .btn { min-width: 44px; min-height: 40px; }
-.center-meta { text-align: center; color: var(--muted); font-size: 12px; }
-.progress {
-  height: 4px; width: min(280px, 40vw); margin: 0 auto 6px; background: rgba(255,255,255,.06);
-  border-radius: 99px; overflow: hidden;
-}
-.progress > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .25s ease; }
-.hint { justify-self: end; color: var(--muted); font-size: 11px; }
-kbd {
-  font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--text);
-  background: rgba(255,255,255,.06); border: 1px solid var(--panel-border);
-  border-radius: 5px; padding: 2px 5px;
-}
-@media (max-width: 720px) { .hint { display: none; } .bottom { grid-template-columns: auto 1fr auto; } }
+.decks a:hover { border-color: var(--amber); }
 </style>
 </head>
 <body>
-<div id="app">
-  <header class="top">
-    <div class="brand">
-      <div class="logo">IP</div>
-      <div>
-        <h1>Interview Prep</h1>
-        <p>Boosty Labs · Utexo · tech screen</p>
-      </div>
+<button class="menu-btn" type="button" id="menuBtn">Menú</button>
+<div class="shell">
+<aside class="side" id="side">
+  <p class="brand">Guía de estudio</p>
+  <p class="brand-sub">Ricardo · Boosty / Utexo · screen corto</p>
+  <div class="grp">Hoy</div>
+  <a href="#inicio">Inicio</a>
+  <a href="#plan">Plan de esta noche</a>
+  <div class="grp">Teoría</div>
+  <a href="#lightning">Lightning</a>
+  <a href="#settlement">Settlement</a>
+  <a href="#rgb">RGB</a>
+  <a href="#utexo">Utexo · producto</a>
+  <a href="#sdk">SDK y trampas</a>
+  <div class="grp">Tú</div>
+  <a href="#casos">Casos del CV</a>
+  <a href="#mock">Mock 10 min</a>
+  <a href="#cierre">Never / checklist</a>
+  <div class="extra">
+    <div class="grp">Decks</div>
+    <a href="./study-deck-manana.html">Cram slides</a>
+    <a href="./study-deck-utexo.html">Utexo slides</a>
+    <a href="./study-deck.html">Foundations</a>
+    <a href="./study-deck-advanced.html">Advanced</a>
+  </div>
+</aside>
+
+<main class="main">
+
+<section id="inicio">
+  <p class="kicker">Tech-expert screen → pasantía</p>
+  <h1>Qué estudiar para mañana.</h1>
+  <p class="lede">Filtro corto en <strong>inglés</strong> con el tech expert. 3 CVs, el tuyo incluido. Si pasas: trial 2–3 meses, ~$600–700, Boosty + Utexo. Quieren ver si te pueden quedar.</p>
+  <div class="grid">
+    <div class="card good">
+      <h3>Barra de pase</h3>
+      <p class="mute">Liquidez correcta · no inventar experiencia · RGB honesto · una pregunta de producto.</p>
     </div>
-    <nav class="sections" id="sections" aria-label="Sections"></nav>
-    <div class="tools">
-      <button class="btn" id="btnQuiz" type="button" title="Hide answers (H)">Quiz</button>
-      <a class="btn" href="./all.html" style="text-decoration:none" title="Complete document">All docs</a>
-      <a class="btn" href="./study-deck-utexo.html" style="text-decoration:none">Utexo</a>
-      <a class="btn" href="./study-deck-advanced.html" style="text-decoration:none" title="Advanced depth">Advanced</a>
-      <button class="btn primary" id="btnFs" type="button" title="Fullscreen (F)">Full</button>
+    <div class="card warn">
+      <h3>No es</h3>
+      <p class="mute">Un screen de BA, Python legal-tech o “Lightning R&amp;D Lead”. Es trial de dev en pagos Bitcoin.</p>
     </div>
-  </header>
-  <main class="main" id="main"></main>
-  <footer class="bottom">
-    <div class="nav">
-      <button class="btn" id="prev" type="button" aria-label="Previous">←</button>
-      <button class="btn" id="next" type="button" aria-label="Next">→</button>
+  </div>
+  <p class="mute">Estudia en español. <strong>Habla las respuestas en inglés.</strong> Escribir ≠ entrevista.</p>
+  <p class="decks">
+    <a href="./study-deck-manana.html">Abrir deck cram</a>
+    <a href="https://docs.utexo.com/getting-started/product-suite">Docs Utexo</a>
+    <a href="https://utexo.com/">utexo.com</a>
+    <a href="https://boostylabs.com/career#opportunities">Boosty careers</a>
+  </p>
+</section>
+
+<section id="plan">
+  <p class="kicker">2.5 horas</p>
+  <h2>Plan de esta noche</h2>
+  <table>
+    <tr><th>Bloque</th><th>Tiempo</th><th>Qué</th></tr>
+    <tr><td>Producto + SDK</td><td>40 min</td><td>4 productos, paquete Node, trampas</td></tr>
+    <tr><td>Lightning</td><td>30 min</td><td>90s, liquidez, no-route, Alice 50k</td></tr>
+    <tr><td>RGB + settle</td><td>25 min</td><td>60s, vs ERC-20, custody</td></tr>
+    <tr><td>Casos CV</td><td>30 min</td><td>Casos 1, 2, 4 + pitch en voz alta</td></tr>
+    <tr><td>Mock</td><td>15 min</td><td>Timer 10 min</td></tr>
+  </table>
+  <p class="mute">Mañana, 30 min: solo scripts + 4 productos + <span class="mono">@utexo/wdk-rgb-lightning</span>. Nada nuevo.</p>
+</section>
+
+<section id="lightning">
+  <p class="kicker">Tema 1</p>
+  <h2>Lightning Network</h2>
+  <p>Layer-2 de Bitcoin: dos partes bloquean BTC en un canal (2-of-2 on-chain), mueven balances off-chain con commitment txs firmados. La chain es para abrir, cerrar y disputas.</p>
+  <div class="grid">
+    <div class="card"><h3>Capacity</h3><p>BTC total locked. Tamaño del tubo.</p></div>
+    <div class="card warn"><h3>Liquidity</h3><p>Cómo está partido. ¿Puedes <em>enviar</em> o <em>recibir</em>?</p></div>
+  </div>
+  <p><strong>Trampa clásica:</strong> canal grande ≠ puedes pagar a cualquiera. Importa la dirección.</p>
+  <h3>Números — hazlos en papel</h3>
+  <p>Alice↔Bob capacity <span class="mono">1,000,000</span> sats. Antes: Alice 700k / Bob 300k. Alice paga 50k.</p>
+  <div class="card good"><strong>Después:</strong> Alice 650k · Bob 350k · capacity igual. <em>“Capacity didn’t change — only the split did.”</em></div>
+  <p>Merchant con canal de 5 BTC y local ≈ 0 tras muchos receives: <strong>inbound saturado</strong>. Pregunta la dirección antes de pathfinding.</p>
+
+  <h3>HTLC + BOLT11</h3>
+  <ul class="tight">
+    <li><strong>HTLC:</strong> pago condicionado (hash + time). El receiver revela el <em>preimage</em> o el timeout devuelve fondos. Atómico en multi-hop.</li>
+    <li><strong>BOLT11:</strong> invoice con amount, payment hash, expiry, routing hints.</li>
+    <li>Unpaid: clock/expiry · amount vs hop · hint faltante · fee budget.</li>
+  </ul>
+
+  <h3>Fallos — misma UX, distinta causa</h3>
+  <table>
+    <tr><th>Síntoma</th><th>Causa</th><th>Check</th></tr>
+    <tr><td>No route</td><td>Hop sin liquidez / amount</td><td>Balances, rutas, capacity</td></tr>
+    <tr><td>Pending</td><td>HTLC in-flight, peer offline</td><td>Timeouts, liveness</td></tr>
+    <tr><td>No recibe</td><td>Sin inbound</td><td>Rebalance / LSP</td></tr>
+    <tr><td>Force-close</td><td>Nodo offline, sin watchtower</td><td>Always-online</td></tr>
+  </table>
+  <p class="mute">Frase senior: “I’d separate routing failure from liquidity failure from peer liveness.”</p>
+
+  <div class="card">
+    <h3>Vocabulario que debes usar</h3>
+    <p class="mute">HTLC · preimage · commitment tx · revocation / justice · watchtower · dual-funding · JIT · MPP · gossip · CLTV · jamming (tema abierto, no “resuelto”).</p>
+  </div>
+
+  <div class="say"><strong>Di esto · Lightning 90s</strong>
+  Lightning is a Bitcoin layer-2. Two parties lock BTC in a 2-of-2 channel, then update balances off-chain with signed commitment transactions. You get near-instant payments; on-chain is for open, close, and disputes. Multi-hop uses HTLCs so the payment is atomic: the receiver reveals a preimage, or timeouts refund. Capacity is the size of the pipe; liquidity is the direction. A huge channel can still fail if the split is wrong.</div>
+
+  <div class="reveal">
+    <button type="button">Reveal — no-route debug</button>
+    <div class="hid say"><strong>Di esto · no-route</strong>
+    I’d reproduce with the payment hash. Check invoice expiry and amount first. Then: is this no-route, insufficient local outbound, or a peer timeout? Inspect local channels, then attempted paths and fee budget. Confirm whether we’re sender, forwarder, or receiver. I’d rather classify the failure than restart the node.</div>
+  </div>
+</section>
+
+<section id="settlement">
+  <p class="kicker">Tema 2</p>
+  <h2>Settlement · PSP · custody</h2>
+  <p><strong>Payment</strong> = el usuario ve “enviado”. <strong>Settlement</strong> = el ledger del partner lo trata como final. La UI puede confirmar en 1s; finance espera un webhook idempotente keyed por payment hash.</p>
+  <div class="say"><strong>Di esto</strong>
+  Payment is the user-visible send. Settlement is when the partner’s system of record treats it as final. I’d ask what “final” means here — Lightning preimage, RGB state, or their ledger credit.</div>
+  <h3>Por qué un PSP quiere USDT en Bitcoin</h3>
+  <p>UX de stablecoin (USD, fees más predecibles) con rieles Lightning + ancla Bitcoin. On-chain BTC es lento/caro para micropagos. USDT clásico vive en Tron/ETH — otro trust y ops.</p>
+  <h3>Preguntas de custody (semana 1)</h3>
+  <ol class="tight">
+    <li>Who holds end-user keys today?</li>
+    <li>Can anything freeze or reverse after preimage reveal?</li>
+    <li>What’s disaster recovery for a force-close?</li>
+    <li>System of record — your DB or chain proofs?</li>
+  </ol>
+  <p><strong>API</strong> = integras pagos. <strong>Cloud</strong> = ellos corren el RLN (no eres LN SRE).</p>
+  <p class="mute">Métricas de trial: success rate <em>por clase de fallo</em>, p95 invoice→settled, inbound headroom, webhook lag, force-close count.</p>
+</section>
+
+<section id="rgb">
+  <p class="kicker">Tema 3</p>
+  <h2>RGB en lenguaje plano</h2>
+  <p>Sistema de activos/contratos para Bitcoin con <strong>client-side validation</strong>: verificas la historia de <em>tus</em> UTXOs, no un contrato global tipo ERC-20. Los assets se anclan a UTXOs de Bitcoin.</p>
+  <table>
+    <tr><th></th><th>ERC-20 USDT</th><th>RGB</th></tr>
+    <tr><td>Estado</td><td>Contrato global</td><td>Historia de tus coins</td></tr>
+    <tr><td>Explorer</td><td>Balances públicos</td><td>Disclosure distinto</td></tr>
+    <tr><td>Speed</td><td>L1/L2 de esa chain</td><td>Lightning</td></tr>
+    <tr><td>Ops</td><td>Tooling maduro</td><td>Más nuevo; backup más duro</td></tr>
+  </table>
+  <p class="mute">No digas “anonymous”. Di <em>different disclosure model</em>.</p>
+  <h3>Tres dominios — no los mezcles</h3>
+  <div class="grid">
+    <div class="card"><h3>Mint / bridge</h3><p class="mute">Lock-mint, TEE, issuance.</p></div>
+    <div class="card"><h3>Lightning ops</h3><p class="mute">Channels, liquidez, invoices.</p></div>
+  </div>
+  <div class="card" style="margin-top:12px"><h3>3. Custody del partner</h3><p class="mute">Keys, freeze, compliance. <em>“I’d never debug a mint failure with only LN pathfinding tools.”</em></p></div>
+  <div class="say"><strong>Di esto · RGB 60s + gap</strong>
+  RGB is a Bitcoin-centric asset system using client-side validation: you verify the history for the UTXOs you care about, instead of a global ERC-20-style contract. Lightning moves value fast; RGB is how stablecoin state can live in a Bitcoin-native design. I haven’t shipped RGB to production. In week one I’d run the official WDK quickstart on the utexo signet, ship a thin invoice→status slice, and pair with whoever owns node and liquidity.</div>
+</section>
+
+<section id="utexo">
+  <p class="kicker">Tema 4 · prioridad</p>
+  <h2>Utexo — cuatro productos</h2>
+  <table>
+    <tr><th>Producto</th><th>Job</th><th>Ángulo</th></tr>
+    <tr><td><strong>SDK</strong></td><td>USDT/RGB + LN en el cliente</td><td>Keys locales</td></tr>
+    <tr><td><strong>Cloud</strong></td><td>Provisiona RLN</td><td>Control plane ≠ API de pagos</td></tr>
+    <tr><td><strong>Mint</strong></td><td>USDT → RGB USDT nativo</td><td>No wrapped. TEE / threshold</td></tr>
+    <tr><td><strong>Swap</strong></td><td>BTC ↔ USDT</td><td><strong>HotPot intent/RFQ</strong>, no AMM</td></tr>
+  </table>
+  <p>Stack: Bitcoin (ancla) → Lightning (ejecución) → RGB (activos) → Utexo (SDK/routing) → Mint + Swap.</p>
+  <div class="say"><strong>Di esto · Utexo 60s</strong>
+  Publicly, Utexo is a coordination layer for Bitcoin-native USDT: RGB for assets, Lightning for speed, Bitcoin for finality. They ship SDK, Cloud-managed RGB Lightning Nodes, Mint to bring USDT onto RGB, and Swap as a HotPot intent/RFQ. I haven’t shipped their internals — I’d start from public docs and a signet vertical slice.</div>
+  <h3>APIs — no las mezcles</h3>
+  <table>
+    <tr><th>Superficie</th><th>Hace</th></tr>
+    <tr><td>Cloud <span class="mono">cloud-api.thunderstack.org</span></td><td>CRUD de nodos. No paga invoices.</td></tr>
+    <tr><td>RLN REST</td><td>Invoices, channels, send, RGB</td></tr>
+    <tr><td>Mint gateway</td><td>Estimate, bridge-in, verify</td></tr>
+    <tr><td>Swap partner <span class="mono">X-API-Key</span></td><td>Quote → intent → settle/refund</td></tr>
+    <tr><td>“RGB Node API”</td><td><strong>404.</strong> No lo cites.</td></tr>
+  </table>
+  <div class="card warn">
+    <h3>Claims con cuidado</h3>
+    <p class="mute">~200 ms (copy). RLN mainnet ≈ RGB on-chain; Lightning = testnet/beta. Mint LN dest = WIP. Mint fee <strong>0.03%</strong>. Schedule “deterministic” no publicado.</p>
+  </div>
+</section>
+
+<section id="sdk">
+  <p class="kicker">Donde se falla el screen</p>
+  <h2>SDK — paquete correcto</h2>
+  <table>
+    <tr><th>Package</th><th>Uso</th></tr>
+    <tr><td class="mono">@utexo/wdk-rgb-lightning</td><td><strong>Node nuevo 2026</strong> — LN + RGB (beta)</td></tr>
+    <tr><td class="mono">@utexo/wdk-wallet-rgb</td><td>Emisión RGB. <em>Otro dataDir</em></td></tr>
+    <tr><td class="mono">@utexo/rgb-sdk-web / -rn</td><td>Browser / React Native</td></tr>
+    <tr><td class="mono">@utexo/rgb-sdk</td><td>Archivado 28 Jul 2026. No usar.</td></tr>
+  </table>
+  <h3>Lifecycle WDK</h3>
+  <ol class="tight">
+    <li><span class="mono">WalletManagerRgbLightning(mnemonic, {network, dataDir})</span></li>
+    <li><span class="mono">getAccount(0)</span></li>
+    <li><span class="mono">unlock</span> — indexer <em>xor</em> bitcoind + proxy + announce</li>
+    <li>Peers → channels → invoices / RGB</li>
+    <li><span class="mono">manager.dispose()</span></li>
+  </ol>
+  <div class="card bad">
+    <h3>Trampas</h3>
+    <ul class="tight">
+      <li>Copiar <span class="mono">UTEXOWallet</span> de Web/RN a WDK</li>
+      <li>Unlock con indexer <em>y</em> bitcoind</li>
+      <li>Mismo <span class="mono">dataDir</span> para wallet-rgb y rgb-lightning</li>
+      <li>RGB sin <span class="mono">createUtxos()</span> (vanilla → colored)</li>
+      <li><span class="mono">witnessData</span> en invoice blinded</li>
+      <li>Init ≠ puedes pagar (falta peer/channel o LSP)</li>
+      <li>VSS no replica VLS signer DB</li>
+      <li>APay outbound aún en desarrollo</li>
+    </ul>
+  </div>
+  <p>Amounts = enteros <span class="mono">10 ** precision</span>. Red de estudio: <span class="mono">utexo</span> (signet).</p>
+  <div class="reveal">
+    <button type="button">Reveal — qué package y por qué no rgb-sdk</button>
+    <div class="hid say"><strong>Di esto</strong>
+    @utexo/wdk-rgb-lightning. @utexo/rgb-sdk was archived 28 Jul 2026. Don’t copy Web/RN UTEXOWallet APIs into WDK. Issuance is @utexo/wdk-wallet-rgb with a separate dataDir.</div>
+  </div>
+</section>
+
+<section id="casos">
+  <p class="kicker">Desde tu CV · REALTOKN + CUBO+</p>
+  <h2>Casos prácticos</h2>
+  <p>Solo hechos del CV. Sin números inventados. LND = fellowship CUBO+, <strong>no</strong> producción en REALTOKN.</p>
+  <table>
+    <tr><th>Si preguntan…</th><th>Cuenta</th></tr>
+    <tr><td>Payments / API</td><td>Caso 1 — transfers</td></tr>
+    <tr><td>Custody / keys</td><td>Caso 2 — MPC</td></tr>
+    <tr><td>Lightning / LND</td><td>Caso 4 — CUBO+</td></tr>
+    <tr><td>RGB / Bitcoin assets</td><td>Caso 3 — Liquid (backup)</td></tr>
+    <tr><td>Trial / 2 weeks</td><td>Caso 5 — intern + hackfest</td></tr>
+  </table>
+
+  <h3>Caso 1 — Transfers API</h3>
+  <p class="mute">REALTOKN · AWS SAM, Lambda, API Gateway, DynamoDB · Go/Python · crypto + RWA.</p>
+  <div class="say"><strong>90s</strong>
+  At REALTOKN I build the transfer backend for crypto and real-world asset moves. It’s serverless on AWS: API Gateway, Lambda, DynamoDB, packaged with SAM. I work in Go and Python. The hard part is not “call the chain” — it’s the state machine. A user can retry. A webhook can arrive twice. So I treat each transfer as a record with a clear status. Same discipline as a Lightning payments API: payment hash as the id, credit once, classify failures instead of saying “it failed.”</div>
+  <div class="reveal">
+    <button type="button">Follow-up — double credits</button>
+    <div class="hid say">I key the transfer by a stable id. If the same request comes again, I return the existing record. I don’t create a second debit.</div>
+  </div>
+
+  <h3>Caso 2 — MPC / custody</h3>
+  <div class="say"><strong>75s</strong>
+  At REALTOKN I worked on MPC wallets. Instead of one private key on one server, the key is split. A transfer needs more than one share to sign. That reduces the blast radius if one machine is compromised. For Utexo I would ask: who holds end-user keys? Can anything freeze after a Lightning preimage? What’s recovery if a node force-closes? MPC is not an LN node seed — different blast radius — but the habit is the same: draw the custody boundary before you write the API.</div>
+
+  <h3>Caso 3 — Liquid AMP (backup)</h3>
+  <div class="say"><strong>90s</strong>
+  I integrated Liquid AMP at REALTOKN — Blockstream’s issuance tools on the Liquid Network. Liquid is a Bitcoin sidechain with a federation trust model, not a global ERC-20 contract. I have not shipped RGB to production. The question I know is: where does issuance trust sit, and where do payments sit? On Utexo, RGB is client-side validation, Lightning is the fast rail. In week one I would run their WDK quickstart on the utexo signet.</div>
+
+  <h3>Caso 4 — CUBO+ / LND (honesto)</h3>
+  <div class="card bad"><p>No digas “I operated LND in production at REALTOKN.”</p></div>
+  <div class="say"><strong>80s</strong>
+  I listed LND because of CUBO+, a Bitcoin and Lightning fellowship with El Salvador’s National Bitcoin Office in 2025. That’s where I learned channels, invoices, and liquidity — not from running Utexo’s mainnet. At work my production system is transfers, MPC, and Liquid. If a BOLT11 payment fails no-route, I know the checklist: expiry, amount, local outbound, then the bottleneck hop. I would not restart the node first.</div>
+
+  <h3>Caso 5 — trial fit</h3>
+  <div class="say"><strong>80s</strong>
+  I already did a short engagement. In 2023 I was a blockchain intern for three months at Conexión. I wrote Solidity for supply-chain traceability. After that, Cacao Track was a top-10 winner at the Ticongle Hackfest. For Boosty I would do the same in two weeks: env and docs, one vertical slice — invoice to status — and a short failure notes doc. You will see written updates, not silence.</div>
+
+  <h3>Pitch 60s</h3>
+  <div class="say"><strong>Cierre</strong>
+  I’m a blockchain developer at REALTOKN. I ship transfer APIs on AWS, MPC custody, and Liquid issuance. I also went through CUBO+, so I can talk Lightning without pretending I run your nodes. Week one: official WDK or Cloud path on signet, one invoice-to-status slice, and a failure taxonomy. My gap is production RGB and LN ops. I’ll close it by pairing and logging real errors, not by bluffing.</div>
+</section>
+
+<section id="mock">
+  <p class="kicker">Timer ON</p>
+  <h2>Mock de 10 minutos</h2>
+  <table>
+    <tr><th>Tiempo</th><th>Pregunta</th></tr>
+    <tr><td>0:30–2:00</td><td>What is Lightning, and why can a fat channel still fail?</td></tr>
+    <tr><td>2:00–3:30</td><td>BOLT11 fails no-route. Week-one debug.</td></tr>
+    <tr><td>3:30–5:00</td><td>Why Bitcoin-native USDT for a PSP? Custody + fees.</td></tr>
+    <tr><td>5:00–6:30</td><td>What is RGB + Lightning? Honest gap.</td></tr>
+    <tr><td>6:30–8:00</td><td>STAR — Caso 1 (transfers)</td></tr>
+    <tr><td>8:00–9:00</td><td>First two weeks — why keep you?</td></tr>
+    <tr><td>9:00–10:00</td><td>Tus 2–3 preguntas</td></tr>
+  </table>
+  <h3>Preguntas que TÚ haces</h3>
+  <ol class="tight">
+    <li>Is the seat Boosty staff-aug into Utexo, Utexo direct, or general Boosty Web3?</li>
+    <li>What does “strong after trial” look like in week 2 vs month 2?</li>
+    <li>Day-one stack: LN ops, RGB, backend API, or partner integrations?</li>
+    <li>Who is the tech expert and what product area do they own?</li>
+  </ol>
+</section>
+
+<section id="cierre">
+  <p class="kicker">Antes de entrar</p>
+  <h2>Never / always</h2>
+  <div class="grid">
+    <div class="card bad">
+      <h3>Never</h3>
+      <ul class="tight">
+        <li>“I built Utexo / I ran their mainnet LN”</li>
+        <li>“I operated LND in production at REALTOKN”</li>
+        <li>“RGB is anonymous”</li>
+        <li>“Swap is an AMM”</li>
+        <li>“Cloud API pays invoices”</li>
+        <li>“I’ll just learn fast” sin plan</li>
+      </ul>
     </div>
-    <div class="center-meta">
-      <div class="progress"><i id="prog"></i></div>
-      <div id="counter">1 / 1</div>
+    <div class="card good">
+      <h3>Always</h3>
+      <ul class="tight">
+        <li>Capacity ≠ liquidity</li>
+        <li>Classify failures</li>
+        <li>Ask what “final” means</li>
+        <li>Mint vs LN vs custody</li>
+        <li>State the RGB gap</li>
+        <li><span class="mono">wdk-rgb-lightning</span> for new Node</li>
+      </ul>
     </div>
-    <div class="hint"><kbd>←</kbd> <kbd>→</kbd> · <kbd>H</kbd> quiz · <kbd>F</kbd> full</div>
-  </footer>
+  </div>
+
+  <h3>Checklist — marca al hablarlo</h3>
+  <label class="check"><input type="checkbox" data-k="ln" /> Lightning ≤90s</label>
+  <label class="check"><input type="checkbox" data-k="alice" /> Alice/Bob 50k en papel</label>
+  <label class="check"><input type="checkbox" data-k="route" /> No-route 45s</label>
+  <label class="check"><input type="checkbox" data-k="ux" /> Utexo 60s · 4 productos</label>
+  <label class="check"><input type="checkbox" data-k="pkg" /> Package Node + por qué no rgb-sdk</label>
+  <label class="check"><input type="checkbox" data-k="rgb" /> RGB + gap honesto</label>
+  <label class="check"><input type="checkbox" data-k="c1" /> Caso 1 transfers</label>
+  <label class="check"><input type="checkbox" data-k="c2" /> Caso 2 MPC</label>
+  <label class="check"><input type="checkbox" data-k="c4" /> Caso 4 CUBO+ sin mentir</label>
+  <label class="check"><input type="checkbox" data-k="pitch" /> Pitch 60s</label>
+  <label class="check"><input type="checkbox" data-k="mock" /> Mock 10 min cronometrado</label>
+  <p class="mute" style="margin-top:28px">Fuentes: docs.utexo.com · tu CV · este repo. No afiliado a Boosty ni Utexo.</p>
+</section>
+
+</main>
 </div>
 <script>
-const slides = [
-{ section: "Intro", html: `
-  <span class="tag">Study deck</span>
-  <h2>Tech-expert screen</h2>
-  <p class="big muted">Short interview → pasantía / trial. Study path: Lightning → settlement → RGB → fit.</p>
-  <div class="grid">
-    <div class="card"><h3>How to study</h3><p class="muted">Read a slide. Say the answer out loud. Reveal only after you try.</p></div>
-    <div class="card"><h3>Goal tonight</h3><p class="muted">Crush liquidity + one STAR + a 60s trial pitch.</p></div>
-  </div>` },
-{ section: "Intro", html: `
-  <span class="tag">Context</span>
-  <h2>What this interview is</h2>
-  <ul>
-    <li>CVs went out in <strong>July</strong> — company hiring developers</li>
-    <li>Gate: short talk with their <strong>tech expert</strong></li>
-    <li>Pass → <strong>pasantía / trial</strong>; they watch fit early (~2–3 months typical)</li>
-    <li>Public product angle: <strong>USDT on Bitcoin</strong> (Lightning + RGB / Utexo), Boosty linked as studio / builder</li>
-  </ul>
-  <p class="muted">Ask in the room: Boosty staff-aug, Utexo direct, or general Web3?</p>` },
-{ section: "Intro", html: `
-  <span class="tag">Agenda</span>
-  <h2>Study order</h2>
-  <table>
-    <tr><th>#</th><th>Block</th><th>Be able to…</th></tr>
-    <tr><td>1</td><td>Lightning</td><td>Channels, liquidity, BOLT11, failures</td></tr>
-    <tr><td>2</td><td>Settlement</td><td>PSP story, fees, custody questions</td></tr>
-    <tr><td>3</td><td>RGB</td><td>Plain English + honest learning plan</td></tr>
-    <tr><td>4</td><td>Fit</td><td>One STAR + 60s trial pitch</td></tr>
-  </table>` },
-{ section: "Lightning", html: `
-  <span class="tag">Day 1 · Lightning</span>
-  <h2>One-sentence model</h2>
-  <p class="big">Lightning is Bitcoin <strong>layer-2</strong>: lock BTC in <strong>payment channels</strong>, update balances <strong>off-chain</strong>, use the chain for open / close / disputes.</p>
-  <div class="card" style="margin-top:16px"><strong>Why it exists:</strong> faster, cheaper payments than broadcasting every payment on-chain.</div>` },
-{ section: "Lightning", html: `
-  <span class="tag">Day 1 · Lightning</span>
-  <h2>Capacity vs liquidity</h2>
-  <div class="grid">
-    <div class="card"><h3>Capacity</h3><p>Total BTC locked — size of the pipe.</p></div>
-    <div class="card warn"><h3>Liquidity</h3><p>How it’s <em>split</em> — can you <strong>send</strong> vs <strong>receive</strong>?</p></div>
-  </div>
-  <p class="big" style="margin-top:18px">Trap: “big channel” ≠ “can pay anyone.” <strong>Direction</strong> matters.</p>` },
-{ section: "Lightning", html: `
-  <span class="tag">Example A1</span>
-  <h2>Balances after a payment</h2>
-  <p>Capacity <span class="mono">1,000,000</span> sats · before Alice <span class="mono">700k</span> / Bob <span class="mono">300k</span></p>
-  <p>Alice pays Bob <span class="mono">50k</span></p>
-  <div class="card good" style="margin-top:14px">After: Alice <span class="mono">650k</span> · Bob <span class="mono">350k</span> · capacity unchanged</div>
-  <p class="muted">Say: “Capacity didn’t change — only the split did.”</p>` },
-{ section: "Lightning", html: `
-  <span class="tag">Day 1 · Lightning</span>
-  <h2>BOLT11 + HTLCs</h2>
-  <div class="grid">
-    <div class="card"><h3>BOLT11</h3><p>Invoice: amount, payment hash, expiry, routing hints. Receiver creates; payer pays.</p></div>
-    <div class="card"><h3>HTLC</h3><p>Multi-hop lock (hash + time). Atomic: preimage settles the path, or timeouts unwind.</p></div>
-  </div>` },
-{ section: "Lightning", html: `
-  <span class="tag">Day 1 · Lightning</span>
-  <h2>LSP in one slide</h2>
-  <ul>
-    <li>Helps wallets/partners avoid full always-online LN ops</li>
-    <li>Channel opens, inbound liquidity, connectivity, sometimes JIT channels</li>
-    <li>Tradeoff: dependency on LSP policy &amp; uptime</li>
-  </ul>
-  <div class="card" style="margin-top:12px">Utexo <em>Cloud</em> (public framing): managed Lightning so partners aren’t LN SRE on day one.</div>` },
-{ section: "Lightning", quiz: true, html: `
-  <span class="tag">Practice</span>
-  <p class="q">Why can a node with huge capacity still fail payments?</p>
-  <button class="reveal" type="button" data-reveal>Reveal answer</button>
-  <div class="answer hidden" data-answer>Capacity is pipe size. Liquidity is direction. Near-zero local → can’t send. Saturated receive side → can’t receive. Routing fails if any hop lacks the right direction for that amount.</div>` },
-{ section: "Lightning", quiz: true, html: `
-  <span class="tag">Practice</span>
-  <p class="q">BOLT11 fails “no route.” First-week debug?</p>
-  <button class="reveal" type="button" data-reveal>Reveal answer</button>
-  <div class="answer hidden" data-answer>Check expiry &amp; amount → local outbound → attempted routes → bottleneck hop liquidity → fee budget / missing private-channel hints. Separate liquidity vs peer liveness vs invoice bugs.</div>` },
-{ section: "Settlement", html: `
-  <span class="tag">Day 2 · Settlement</span>
-  <h2>Product one-liner (public)</h2>
-  <p class="big">Utexo: move <strong>USDT instantly and privately on Bitcoin</strong> — <strong>API</strong> + <strong>Cloud</strong> for Lightning / RGB-style stablecoin payments.</p>
-  <p class="muted">ICP: PSPs, exchanges, custodians, wallets, iGaming.</p>` },
-{ section: "Settlement", html: `
-  <span class="tag">Day 2 · Settlement</span>
-  <h2>Payment vs settlement</h2>
-  <div class="grid">
-    <div class="card"><h3>Payment</h3><p>User sees “done” in the app (speed / UX).</p></div>
-    <div class="card"><h3>Settlement</h3><p>Partner ledger treats it as final (webhook, hash, policy).</p></div>
-  </div>
-  <p style="margin-top:14px">Line: “I’d align what <em>final</em> means in week 1.”</p>` },
-{ section: "Settlement", html: `
-  <span class="tag">Day 2 · Settlement</span>
-  <h2>Custody questions</h2>
-  <ul>
-    <li>Who holds end-user keys today?</li>
-    <li>Freeze / reverse after preimage reveal?</li>
-    <li>Force-close disaster recovery?</li>
-    <li>System of record: DB or chain proofs?</li>
-  </ul>` },
-{ section: "Settlement", quiz: true, html: `
-  <span class="tag">Practice</span>
-  <p class="q">Why would a PSP care about Bitcoin-native USDT rails?</p>
-  <button class="reveal" type="button" data-reveal>Reveal answer</button>
-  <div class="answer hidden" data-answer>Instant UX vs slow L1, fee predictability in USDT terms, API (+ Cloud) without becoming full LN ops, clear custody boundary. Ask about success vs failure fees and idempotent webhooks.</div>` },
-{ section: "RGB", html: `
-  <span class="tag">Day 3 · RGB</span>
-  <h2>RGB in plain English</h2>
-  <p class="big">Bitcoin-centric assets with <strong>client-side validation</strong>: verify history for <em>your</em> coins; ownership anchors to Bitcoin <strong>UTXOs</strong> — not one global ERC-20-style contract ledger.</p>` },
-{ section: "RGB", html: `
-  <span class="tag">Day 3 · RGB</span>
-  <h2>Compare</h2>
-  <table>
-    <tr><th></th><th>Account USDT</th><th>RGB-style</th></tr>
-    <tr><td>State</td><td>Global contract</td><td>Client-side history</td></tr>
-    <tr><td>Explorer</td><td>Public balances</td><td>Different disclosure</td></tr>
-    <tr><td>Speed</td><td>That chain’s L1/L2</td><td>Lightning for instant</td></tr>
-    <tr><td>Tooling</td><td>Mature EVM</td><td>Newer — docs/SDK matter</td></tr>
-  </table>` },
-{ section: "RGB", html: `
-  <span class="tag">Day 3 · RGB</span>
-  <h2>Lightning + RGB</h2>
-  <p class="big">Lightning = fast rails.<br/>RGB = Bitcoin-native asset representation.<br/>Together (public Utexo story) = <strong>USDT UX on Bitcoin topology</strong>.</p>
-  <div class="card warn" style="margin-top:14px">Bridge / mint trust ≠ LN pathfinding. Don’t mix failure domains.</div>` },
-{ section: "RGB", quiz: true, html: `
-  <span class="tag">Practice</span>
-  <p class="q">You haven’t shipped RGB. What do you say?</p>
-  <button class="reveal" type="button" data-reveal>Reveal answer</button>
-  <div class="answer hidden" data-answer>“I haven’t shipped RGB to production. I understand client-side validation and why it pairs with Lightning for USDT-on-Bitcoin. In weeks 1–2 I’d run your public docs/SDK path, ship a thin integration or checklist, and pair with whoever owns node and liquidity.”</div>` },
-{ section: "Fit", html: `
-  <span class="tag">STAR · Fit</span>
-  <h2>STAR in 90 seconds</h2>
-  <ul>
-    <li><strong>S</strong>ituation — one sentence</li>
-    <li><strong>T</strong>ask — your job</li>
-    <li><strong>A</strong>ction — 2–4 steps <em>you</em> did</li>
-    <li><strong>R</strong>esult — metric or clear outcome + lesson</li>
-  </ul>
-  <p class="muted">Never present fictional samples as your bio.</p>` },
-{ section: "Fit", html: `
-  <span class="tag">Trial</span>
-  <h2>60s pasantía pitch</h2>
-  <ol>
-    <li>Why this problem (specific)</li>
-    <li>Weeks 1–2 plan (docs → invoice→webhook slice)</li>
-    <li>How you show “keep”</li>
-    <li>Honest gap + close plan</li>
-  </ol>` },
-{ section: "Fit", html: `
-  <span class="tag">Ask them</span>
-  <h2>Your four questions</h2>
-  <ol>
-    <li>Boosty staff-aug / Utexo / general Web3?</li>
-    <li>“Strong after trial” in week 2 vs month 2?</li>
-    <li>Day-one: LN ops, RGB, API, or integrations?</li>
-    <li>Who is the tech expert — what do they own?</li>
-  </ol>` },
-{ section: "Drill", quiz: true, html: `
-  <span class="tag">2-min drill</span>
-  <p class="q">Merchant channel is 10M sats. Receives start failing. Why?</p>
-  <button class="reveal" type="button" data-reveal>Reveal answer</button>
-  <div class="answer hidden" data-answer>Likely receive-side / inbound saturation — not “channel too small.” Confirm direction, then rebalance / new inbound / LSP liquidity.</div>` },
-{ section: "Drill", quiz: true, html: `
-  <span class="tag">2-min drill</span>
-  <p class="q">Sell Bitcoin-native USDT to a PSP in 60 seconds.</p>
-  <button class="reveal" type="button" data-reveal>Reveal answer</button>
-  <div class="answer hidden" data-answer>Instant UX, fee predictability, API + optional Cloud, custody boundary, Lightning speed + Bitcoin-centric assets. End with one question on finality and fees.</div>` },
-{ section: "Drill", html: `
-  <span class="tag">Close</span>
-  <h2>Tonight’s loop</h2>
-  <ol>
-    <li>Replay Lightning — answers out loud</li>
-    <li>One real STAR (90s)</li>
-    <li>Trial pitch once</li>
-    <li>Open <span class="mono">06-worked-examples.md</span> for A1 / A5 / B2</li>
-  </ol>
-  <p class="muted" style="margin-top:18px">Local files: <span class="mono">E:\\interview-prep</span></p>` }
-];
-
-const main = document.getElementById('main');
-const prog = document.getElementById('prog');
-const counter = document.getElementById('counter');
-const sectionsEl = document.getElementById('sections');
-const btnQuiz = document.getElementById('btnQuiz');
-let i = 0, quizMode = false, touchX = null;
-
-const sectionNames = [...new Set(slides.map(s => s.section))];
-sectionNames.forEach(name => {
-  const b = document.createElement('button');
-  b.className = 'sec'; b.type = 'button'; b.textContent = name; b.dataset.section = name;
-  b.addEventListener('click', () => { i = slides.findIndex(s => s.section === name); render(); });
-  sectionsEl.appendChild(b);
+const side = document.getElementById("side");
+document.getElementById("menuBtn").onclick = () => side.classList.toggle("open");
+side.querySelectorAll("a[href^='#']").forEach((a) => {
+  a.addEventListener("click", () => side.classList.remove("open"));
 });
-
-function render() {
-  const slide = slides[i];
-  main.innerHTML = `<article class="slide" id="slide">${slide.html}</article>`;
-  counter.textContent = `${i + 1} / ${slides.length}`;
-  prog.style.width = `${((i + 1) / slides.length) * 100}%`;
-  [...sectionsEl.children].forEach(el => el.classList.toggle('on', el.dataset.section === slide.section));
-  document.getElementById('prev').disabled = i === 0;
-  document.getElementById('next').disabled = i === slides.length - 1;
-  bindReveal();
-  applyQuiz();
+const links = [...side.querySelectorAll("a[href^='#']")];
+const secs = links.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+function mark() {
+  let cur = secs[0];
+  for (const s of secs) if (s.getBoundingClientRect().top < 120) cur = s;
+  links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + cur.id));
 }
-function bindReveal() {
-  main.querySelectorAll('[data-reveal]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const ans = btn.parentElement.querySelector('[data-answer]');
-      if (!ans) return;
-      ans.classList.remove('hidden');
-      btn.remove();
-    });
-  });
+document.addEventListener("scroll", mark, { passive: true });
+function goHash() {
+  const id = location.hash.slice(1);
+  const el = id && document.getElementById(id);
+  if (el) el.scrollIntoView();
+  mark();
 }
-function applyQuiz() {
-  btnQuiz.classList.toggle('primary', quizMode);
-  btnQuiz.textContent = quizMode ? 'Quiz on' : 'Quiz';
-  main.querySelectorAll('[data-answer]').forEach(ans => {
-    const isQuizSlide = slides[i].quiz;
-    if (quizMode && isQuizSlide) {
-      ans.classList.add('hidden');
-      if (!ans.parentElement.querySelector('[data-reveal]')) {
-        const btn = document.createElement('button');
-        btn.className = 'reveal'; btn.type = 'button'; btn.dataset.reveal = '1';
-        btn.textContent = 'Reveal answer';
-        ans.before(btn);
-        bindReveal();
-      }
-    }
-  });
-}
-function next() { if (i < slides.length - 1) { i++; render(); } }
-function prev() { if (i > 0) { i--; render(); } }
-
-document.getElementById('next').onclick = next;
-document.getElementById('prev').onclick = prev;
-btnQuiz.onclick = () => { quizMode = !quizMode; render(); };
-document.getElementById('btnFs').onclick = () => {
-  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-  else document.exitFullscreen();
-};
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
-  if (e.key === 'h' || e.key === 'H') { quizMode = !quizMode; render(); }
-  if (e.key === 'f' || e.key === 'F') document.getElementById('btnFs').click();
+window.addEventListener("hashchange", goHash);
+goHash();
+document.querySelectorAll(".reveal").forEach((box) => {
+  box.querySelector("button")?.addEventListener("click", () => box.classList.add("open"));
 });
-main.addEventListener('touchstart', e => { touchX = e.changedTouches[0].screenX; }, { passive: true });
-main.addEventListener('touchend', e => {
-  if (touchX == null) return;
-  const dx = e.changedTouches[0].screenX - touchX;
-  touchX = null;
-  if (Math.abs(dx) < 50) return;
-  if (dx < 0) next(); else prev();
-}, { passive: true });
-
-render();
+document.querySelectorAll("input[data-k]").forEach((el) => {
+  const k = "guia-" + el.dataset.k;
+  el.checked = localStorage.getItem(k) === "1";
+  el.addEventListener("change", () => localStorage.setItem(k, el.checked ? "1" : "0"));
+});
 </script>
 </body>
 </html>

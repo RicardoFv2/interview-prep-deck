@@ -1,3 +1,7 @@
+**Sitio de estudio (ábrelo en el navegador):** [`index.html`](./index.html)
+
+**Mañana (entrevista):** [`10-manana-entrevista.md`](./10-manana-entrevista.md) · deck [`study-deck-manana.html`](./study-deck-manana.html)
+
 **One file with everything:** [`ALL-IN-ONE.md`](./ALL-IN-ONE.md)
 
 # Interview study set — Boosty Labs / Utexo tech-expert screen
@@ -10,7 +14,8 @@
 | 1 | `01-lightning-day1.md` | Channels, liquidity, BOLT11, HTLC, LSP, failures | 45–60m + 15m drill |
 | 2 | `02-settlement-day2.md` | BTC↔USDT narrative, fees, custody, partner ICP | 45m + 15m drill |
 | 3 | `03-rgb-day3.md` | RGB in plain language + how it meets Lightning | 45m + 15m drill |
-| 4 | `04-star-stories.md` | 5 story templates + trial fit pitch | 30–45m |
+| 4 | `04-star-stories.md` | STAR filled from Ricardo’s CV | 20m drill |
+| — | `11-casos-cv.md` | Spoken EN scripts + follow-ups from CV | 30–40m |
 | 5 | `05-mock-screen.md` | Full 10-min mock script (use after 1–4) | 10–15m |
 | 6 | `06-worked-examples.md` | Generated scenarios, numeric Lightning, PSP/RGB/STAR samples | 30–45m |
 | — | `study-deck.html` | Click-through presentation (browser) — foundations | 20–30m |
@@ -32,3 +37,5 @@
 | — | `study-deck-utexo.html` | Utexo products/SDK slide deck | 25–40m |
 
 | 9 | `09-utexo-docs-digest.md` | Full docs crawl digest (APIs, fees, gaps, E2E flows) | reference |
+| **10** | `10-manana-entrevista.md` | **Cram de la noche antes** (ES + scripts EN) | 2.5h + mock |
+| — | `study-deck-manana.html` | Deck clickeable del cram | 25–40m |

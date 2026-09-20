@@ -1,14 +1,13 @@
 ﻿# Interview Prep Deck
 
-Public study deck for a short **Boosty Labs / Utexo** tech-expert interview screen.
+Guía pública para el screen tech-expert de **Boosty Labs / Utexo**.
 
-**Live**
-- Basics: https://ricardofv2.github.io/interview-prep-deck/
-- Advanced: https://ricardofv2.github.io/interview-prep-deck/study-deck-advanced.html
+**Live:** https://ricardofv2.github.io/interview-prep-deck/
 
-## Decks
-- `index.html` — foundations
-- `study-deck-advanced.html` — tech-expert depth
-- `07-advanced-tech.md` — full advanced notes
+- `index.html` — guía completa (teoría, scripts, casos del CV, mock)
+- `study-deck-manana.html` — cram slides
+- `study-deck.html` — foundations
+- `study-deck-utexo.html` — producto / SDK
+- `study-deck-advanced.html` — profundidad
 
-Study material only — not affiliated with Boosty Labs or Utexo.
+Material de estudio. No afiliado a Boosty Labs ni Utexo.
